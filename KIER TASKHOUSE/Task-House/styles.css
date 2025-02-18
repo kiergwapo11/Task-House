@@ -465,11 +465,12 @@ body {
     text-align: center;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    margin: 20px auto;
+    margin:  auto;
+    margin-top: 20px;
     margin-left: calc(250px + 7%);
     width: 80%;
     max-width: 1400px;
-    height: calc(100vh - 40px); /* Subtract margins */
+    height: 100%; /* Subtract margins */
     overflow: hidden; /* Prevent scrolling */
 }
 
