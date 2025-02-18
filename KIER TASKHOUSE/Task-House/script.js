@@ -5,6 +5,37 @@ document.addEventListener('DOMContentLoaded', function() {
         once: true,
         offset: 100
     });
+
+    // Get sidebar links with specific href values
+    const welcomeLink = document.querySelector('a[href="#welcome"]');
+    const tasksLink = document.querySelector('a[href="#tasks"]');
+    
+    // Get containers
+    const welcomeContainer = document.querySelector('.main-container');
+    const taskContainer = document.querySelector('.task-container');
+
+    // Initially show welcome and hide tasks
+    welcomeContainer.style.display = 'block';
+    taskContainer.style.display = 'none';
+
+    // Add click handlers
+    tasksLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        welcomeContainer.style.display = 'none';
+        taskContainer.style.display = 'block';
+        // Update active state
+        welcomeLink.classList.remove('active');
+        tasksLink.classList.add('active');
+    });
+
+    welcomeLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        welcomeContainer.style.display = 'block';
+        taskContainer.style.display = 'none';
+        // Update active state
+        tasksLink.classList.remove('active');
+        welcomeLink.classList.add('active');
+    });
 });
 
 // Copy format text function

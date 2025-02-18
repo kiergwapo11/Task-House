@@ -30,17 +30,97 @@
             <a href="#" class="edit-profile">Edit Profile</a>
         </div>
         <nav class="nav">
-            <a href="#" class="active"><i class="fas fa-home"></i> Welcome</a>
-            <a href="#"><i class="fas fa-tasks"></i> My Tasks <span class="badge">1</span></a>
+            <a href="#welcome" class="active"><i class="fas fa-home"></i> Welcome</a>
+            <a href="#tasks"><i class="fas fa-tasks"></i> My Tasks</a>
             <a href="#"><i class="fas fa-cogs"></i> Operation</a>
             <a href="#"><i class="fas fa-users"></i> Human Resources</a>
         </nav>
     </div>
 
     <div class="main-container">
-        <img src="img/banner.png" alt="Banner" class="banner-image">
-        <p class="welcome-message">Welcome to Virtual BizNest!</p>
-        <p class="sub-message">Join us in making a difference through successful referrals.</p>
+        <div class="banner-wrapper">
+            <img src="img/banner.png" alt="Welcome Banner" class="banner-image">
+        </div>
+        
+        <div class="welcome-content">
+            <h1 class="welcome-message">Welcome to Virtual BizNest!</h1>
+            <p class="sub-message">Join us in making a difference through successful referrals.</p>
+            
+            <div class="highlight-box">
+                <p class="highlight-text">Discover exciting opportunities and be part of our growing team</p>
+            </div>
+
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3>Sales & Design Assistant</h3>
+                    <p>Join our creative team and help shape the future of design</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Sales Apprentice</h3>
+                    <p>Learn and grow with our experienced sales team</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Healthcare CSR</h3>
+                    <p>Make a difference in healthcare customer service</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-container" id="tasks-view">
+        <div class="task-header">
+            <div class="title">
+                <i class="fas fa-tasks"></i> MY TASKS
+            </div>
+            <div class="header-buttons">
+                <button class="view-task">View Task</button>
+                <button class="add-task">Add Task</button>
+            </div>
+        </div>
+
+        <div class="task-info">
+            <div>Date & Time: February 18, 2025 - 02:26 PM</div>
+            <div>Break Time: 00:00:00</div>
+            <div class="search-box">
+                <input type="search" placeholder="Search tasks...">
+            </div>
+        </div>
+
+        <div class="task-table-wrapper">
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Tasks ID</th>
+                        <th>Deadline</th>
+                        <th>Delegator</th>
+                        <th>Tasks</th>
+                        <th>Account Name</th>
+                        <th>Project Name</th>
+                        <th>Billed Hours</th>
+                        <th>Worked Hours</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>55739</td>
+                        <td>Ongoing</td>
+                        <td>Leosa Laramie</td>
+                        <td>Improving the UI design of the Taskhouse</td>
+                        <td>VBN Interns</td>
+                        <td>Task House</td>
+                        <td>20.00</td>
+                        <td>16.02</td>
+                        <td><span class="status-working">Working</span></td>
+                        <td class="action-buttons">
+                            <button class="action-btn"><i class="fas fa-cog"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Scripts -->
