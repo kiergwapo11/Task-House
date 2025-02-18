@@ -36,6 +36,38 @@ document.addEventListener('DOMContentLoaded', function() {
         tasksLink.classList.remove('active');
         welcomeLink.classList.add('active');
     });
+
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const body = document.body;
+
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    body.appendChild(overlay);
+
+    // Toggle sidebar
+    mobileMenuBtn.addEventListener('click', function() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close sidebar when clicking overlay
+    overlay.addEventListener('click', function() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+    });
+
+    // Close sidebar on window resize if screen becomes large
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 992) {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            body.style.overflow = '';
+        }
+    });
 });
 
 // Copy format text function
@@ -94,3 +126,63 @@ document.querySelectorAll('.apply-btn').forEach(btn => {
         console.log(`Applied for position: ${position}`);
     });
 });
+
+// Settings dropdown toggle
+const settingsBtn = document.querySelector('.settings-btn');
+const settingsDropdown = document.querySelector('.settings-dropdown');
+
+settingsBtn?.addEventListener('click', function(e) {
+    e.stopPropagation();
+    settingsDropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function() {
+    settingsDropdown?.classList.remove('active');
+});
+
+// Add Task Modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const addTaskBtn = document.querySelector('.add-task');
+    const addTaskModal = document.getElementById('addTaskModal');
+    const closeModalBtns = document.querySelectorAll('.close-modal');
+    const addTaskForm = document.getElementById('addTaskForm');
+
+    // Debug log to check if elements are found
+    console.log('Add Task Button:', addTaskBtn);
+    console.log('Modal:', addTaskModal);
+
+    // Open modal - using regular function to ensure proper binding
+    addTaskBtn.addEventListener('click', function() {
+        console.log('Add Task clicked'); // Debug log
+        addTaskModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Close modal function
+    function closeModal() {
+        console.log('Closing modal'); // Debug log
+        addTaskModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close modal events
+    closeModalBtns.forEach(btn => {
+        btn.addEventListener('click', closeModal);
+    });
+
+    // Close on outside click
+    addTaskModal.addEventListener('click', function(e) {
+        if (e.target === addTaskModal) {
+            closeModal();
+        }
+    });
+
+    // Form submission
+    addTaskForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Add your form submission logic here
+        closeModal();
+    });
+});
+

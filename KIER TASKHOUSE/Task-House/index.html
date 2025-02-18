@@ -11,6 +11,9 @@
 </head>
 <body>
     <header class="header">
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
         <div class="logo">
             <img src="img/sh.png" alt="Task House Logo" class="logo-img transparent-bg">
             
@@ -19,6 +22,12 @@
             <a href="mailto:careers@virtualbiznest.com" class="icon"><i class="fas fa-envelope"></i></a>
             <a href="#" class="icon"><i class="fas fa-clock"></i></a>
             <a href="#" class="icon"><i class="fas fa-camera"></i></a>
+            <button class="settings-btn"><i class="fas fa-cog"></i></button>
+            <div class="settings-dropdown">
+                <a href="mailto:careers@virtualbiznest.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
         </div>
         
     </header>
@@ -106,7 +115,7 @@
                     <tr>
                         <td>55739</td>
                         <td>Ongoing</td>
-                        <td>Leosa Laramie</td>
+                        <td>Christian Kier Ortalla</td>
                         <td>Improving the UI design of the Taskhouse</td>
                         <td>VBN Interns</td>
                         <td>Task House</td>
@@ -126,5 +135,56 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
+
+    <!-- Add this before the closing body tag -->
+    <div class="modal" id="addTaskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> Add New Task</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <form id="addTaskForm">
+                <div class="form-group">
+                    <label>Account Name</label>
+                    <select class="form-control" required>
+                        <option value="">Select Account</option>
+                        <option value="VBN Interns">VBN Interns</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Approver</label>
+                    <select class="form-control" required>
+                        <option value="">Select Approver</option>
+                        <option value="Anthony Cirilo">Anthony Cirilo</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Task Description</label>
+                    <textarea class="form-control" rows="4" placeholder="Please enter your task here." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Available Time</label>
+                    <input type="text" class="form-control" value="9:33:00" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label>Billed Hours</label>
+                    <div class="time-inputs">
+                        <input type="number" class="form-control" placeholder="Hours" min="0" max="24" required>
+                        <input type="number" class="form-control" placeholder="Minutes" min="0" max="59" required>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="view-task close-modal">Cancel</button>
+                    <button type="submit" class="add-task">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
