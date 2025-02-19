@@ -68,6 +68,80 @@ document.addEventListener('DOMContentLoaded', function() {
             body.style.overflow = '';
         }
     });
+
+    updateCurrentTime();
+    setupFilters();
+    setupTableSorting();
+    setupSearch();
+    setupActionButtons();
+
+    // Fix sidebar navigation
+    const sidebarLinks = document.querySelectorAll('.nav a');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all links
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            
+            // Add active class to clicked link
+            this.classList.add('active');
+            
+            // Handle content display
+            const target = this.getAttribute('href').substring(1);
+            if (target === 'welcome') {
+                welcomeContainer.style.display = 'block';
+                taskContainer.style.display = 'none';
+            } else if (target === 'tasks') {
+                welcomeContainer.style.display = 'none';
+                taskContainer.style.display = 'block';
+            }
+
+            // Close sidebar on mobile after clicking
+            if (window.innerWidth <= 992) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+    });
+
+    // Initialize clock
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Task filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterTasks(btn.dataset.filter);
+        });
+    });
+
+    // Search functionality
+    const searchInput = document.querySelector('.search-box input');
+    let searchTimer;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+            const searchTerm = e.target.value.toLowerCase();
+            searchTasks(searchTerm);
+        }, 300);
+    });
+
+    // Enhanced Functionality
+    setupSmartSearch();
+    
+    // Enhanced Filters with Animation
+    setupEnhancedFilters();
+    
+    // Real-time Clock with Smooth Update
+    setupLiveTimer();
+    
+    // Interactive Table Features
+    setupTableInteractions();
 });
 
 // Copy format text function
@@ -185,4 +259,292 @@ document.addEventListener('DOMContentLoaded', function() {
         closeModal();
     });
 });
+
+// Update current time
+function updateCurrentTime() {
+    const timeElement = document.getElementById('currentTime');
+    if (timeElement) {
+        setInterval(() => {
+            const now = new Date();
+            const options = { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            };
+            timeElement.textContent = now.toLocaleTimeString('en-US', options);
+        }, 1000);
+    }
+}
+
+// Task filtering
+function setupFilters() {
+    const pills = document.querySelectorAll('.filter-pills .pill');
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            // Remove active class from all pills
+            pills.forEach(p => p.classList.remove('active'));
+            // Add active class to clicked pill
+            pill.classList.add('active');
+            
+            // Filter tasks based on status
+            const status = pill.textContent.toLowerCase();
+            filterTasks(status);
+        });
+    });
+}
+
+// Task sorting
+function setupTableSorting() {
+    const headers = document.querySelectorAll('.task-table th');
+    headers.forEach(header => {
+        if (header.querySelector('.fas.fa-sort')) {
+            header.addEventListener('click', () => {
+                const column = header.textContent.trim();
+                sortTable(column);
+            });
+        }
+    });
+}
+
+// Search functionality
+function setupSearch() {
+    const searchInput = document.querySelector('.search-box input');
+    let debounceTimer;
+
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('.task-table tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }, 300);
+    });
+}
+
+// Action button handlers
+function setupActionButtons() {
+    document.querySelectorAll('.action-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const action = btn.classList.contains('edit') ? 'edit' :
+                          btn.classList.contains('view') ? 'view' :
+                          'delete';
+            
+            const row = btn.closest('tr');
+            const taskId = row.querySelector('td:first-child').textContent;
+            
+            handleTaskAction(action, taskId);
+        });
+    });
+}
+
+function handleTaskAction(action, taskId) {
+    switch(action) {
+        case 'edit':
+            // Show edit modal
+            console.log(`Editing task ${taskId}`);
+            break;
+        case 'view':
+            // Show task details
+            console.log(`Viewing task ${taskId}`);
+            break;
+        case 'delete':
+            if (confirm('Are you sure you want to delete this task?')) {
+                console.log(`Deleting task ${taskId}`);
+            }
+            break;
+    }
+}
+
+// Enhanced Table Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Table Sorting
+    const sortableHeaders = document.querySelectorAll('.task-table th[data-sortable]');
+    sortableHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const column = header.dataset.column;
+            sortTable(column);
+        });
+    });
+
+    // Quick Edit
+    const editableCells = document.querySelectorAll('.task-table td[data-editable]');
+    editableCells.forEach(cell => {
+        cell.addEventListener('dblclick', () => {
+            makeEditable(cell);
+        });
+    });
+
+    // Search Functionality
+    const searchInput = document.querySelector('.search-box input');
+    let searchDebounceTimer;
+    
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchDebounceTimer);
+        searchDebounceTimer = setTimeout(() => {
+            searchTasks(e.target.value.toLowerCase());
+        }, 300);
+    });
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'n') { // Ctrl + N
+            e.preventDefault();
+            openNewTaskModal();
+        }
+    });
+});
+
+// Notification System
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Loading States
+function showLoading() {
+    const rows = document.querySelectorAll('.task-table tbody tr');
+    rows.forEach(row => {
+        row.classList.add('loading-skeleton');
+    });
+}
+
+function hideLoading() {
+    const rows = document.querySelectorAll('.task-table tbody tr');
+    rows.forEach(row => {
+        row.classList.remove('loading-skeleton');
+    });
+}
+
+function updateClock() {
+    const timeElement = document.getElementById('currentTime');
+    const now = new Date();
+    timeElement.textContent = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+}
+
+function filterTasks(filter) {
+    const tasks = document.querySelectorAll('.task-table tbody tr');
+    tasks.forEach(task => {
+        const status = task.querySelector('.status-badge').dataset.status;
+        task.style.display = (filter === 'all' || status === filter) ? '' : 'none';
+    });
+}
+
+function searchTasks(term) {
+    const tasks = document.querySelectorAll('.task-table tbody tr');
+    tasks.forEach(task => {
+        const text = task.textContent.toLowerCase();
+        task.style.display = text.includes(term) ? '' : 'none';
+    });
+}
+
+function setupSmartSearch() {
+    const searchInput = document.querySelector('.search-field input');
+    
+    // Command/Ctrl + K to focus search
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+        }
+    });
+
+    // Smart search with debounce
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            const searchTerm = e.target.value.toLowerCase();
+            performSmartSearch(searchTerm);
+        }, 200);
+    });
+}
+
+function setupEnhancedFilters() {
+    const filterChips = document.querySelectorAll('.filter-chip');
+    
+    filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            // Smooth transition for filter change
+            filterChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            
+            // Animate table during filter
+            const table = document.querySelector('.task-table');
+            table.style.opacity = '0.6';
+            
+            setTimeout(() => {
+                filterTasks(chip.dataset.filter);
+                table.style.opacity = '1';
+            }, 200);
+        });
+    });
+}
+
+function setupLiveTimer() {
+    const timeElement = document.getElementById('currentTime');
+    
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        
+        // Smooth time update
+        timeElement.style.opacity = '0';
+        setTimeout(() => {
+            timeElement.textContent = timeString;
+            timeElement.style.opacity = '1';
+        }, 200);
+    }
+    
+    updateTime();
+    setInterval(updateTime, 1000);
+}
+
+function setupTableInteractions() {
+    const taskRows = document.querySelectorAll('.task-row');
+    
+    taskRows.forEach(row => {
+        // Hover effects
+        row.addEventListener('mouseenter', () => {
+            row.classList.add('row-hover');
+        });
+        
+        row.addEventListener('mouseleave', () => {
+            row.classList.remove('row-hover');
+        });
+        
+        // Quick actions
+        row.addEventListener('click', (e) => {
+            if (e.target.closest('.action-button')) {
+                handleTaskAction(e.target.closest('.action-button'), row);
+            }
+        });
+    });
+}
 
