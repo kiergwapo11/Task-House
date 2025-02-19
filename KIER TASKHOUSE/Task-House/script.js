@@ -142,6 +142,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Interactive Table Features
     setupTableInteractions();
+
+    // Initialize all components
+    initializeClock();
+    initializeFilters();
+    initializeSearch();
+    initializeTaskActions();
+    initializeKeyboardShortcuts();
 });
 
 // Copy format text function
@@ -547,4 +554,113 @@ function setupTableInteractions() {
         });
     });
 }
+
+// Clock functionality
+function initializeClock() {
+    const updateTime = () => {
+        const timeElement = document.getElementById('currentTime');
+        const now = new Date();
+        timeElement.textContent = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    };
+    updateTime();
+    setInterval(updateTime, 1000);
+}
+
+// Filter functionality
+function initializeFilters() {
+    const pills = document.querySelectorAll('.filter-pill');
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            pills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            filterTasks(pill.dataset.filter);
+        });
+    });
+}
+
+// Search functionality with keyboard shortcut
+function initializeSearch() {
+    const searchInput = document.querySelector('.search-box input');
+    
+    // Command/Ctrl + K shortcut
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+        }
+    });
+
+    // Search implementation
+    let searchTimer;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+            const searchTerm = e.target.value.toLowerCase();
+            searchTasks(searchTerm);
+        }, 200);
+    });
+}
+
+// Task actions
+function initializeTaskActions() {
+    const createTaskBtn = document.querySelector('.create-task-btn');
+    createTaskBtn.addEventListener('click', () => {
+        // Show create task modal
+        document.getElementById('addTaskModal').classList.add('active');
+    });
+}
+
+// Keyboard Shortcuts
+function initializeKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Search shortcut (Cmd/Ctrl + K)
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            document.querySelector('.smart-search').focus();
+        }
+
+        // Create task shortcut (Cmd/Ctrl + N)
+        if ((e.metaKey || e.ctrlKey) && e.key === 'n') {
+            e.preventDefault();
+            document.querySelector('.create-task-btn').click();
+        }
+    });
+}
+
+// CSS Animations
+const styles = `
+@keyframes numberFlip {
+    0% { transform: translateY(-100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+`;
+
+// Add animations to document
+const styleSheet = document.createElement('style');
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
 

@@ -77,22 +77,20 @@
     </div>
 
     <div class="task-container">
-        <!-- Premium Dashboard Header -->
+        <!-- Dashboard Header -->
         <div class="dashboard-header">
             <div class="header-content">
                 <div class="header-left">
-                    <div class="header-icon">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
-                    <div class="header-info">
-                        <h1>My Tasks Dashboard</h1>
-                        <div class="header-meta">
+                    <div class="header-title">
+                        <div class="header-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div>
+                            <h1>My Tasks Dashboard</h1>
                             <span class="active-task-badge">
                                 <span class="pulse-dot"></span>
                                 1 Active Task
                             </span>
-                            <span class="separator">•</span>
-                            <span class="subtitle">Real-time task management & tracking</span>
                         </div>
                     </div>
                 </div>
@@ -103,120 +101,70 @@
             </div>
         </div>
 
-        <!-- Enhanced Stats Section -->
-        <div class="stats-section">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon">
                     <i class="fas fa-clock"></i>
                 </div>
                 <div class="stat-info">
                     <h3>Current Time</h3>
-                    <div class="stat-value" id="currentTime">04:46 PM</div>
+                    <span class="stat-value" id="currentTime">--:--:-- AM</span>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">
-                    <i class="fas fa-stopwatch"></i>
+                    <i class="fas fa-list-check"></i>
                 </div>
                 <div class="stat-info">
-                    <h3>Break Time</h3>
-                    <div class="stat-value">00:00:00</div>
+                    <h3>Total Tasks</h3>
+                    <span class="stat-value">12</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-spinner"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>In Progress</h3>
+                    <span class="stat-value">5</span>
                 </div>
             </div>
         </div>
 
-        <!-- Modern Filter Section -->
-        <div class="filter-section">
-            <div class="filter-pills">
-                <button class="filter-pill active">
-                    <i class="fas fa-th-large"></i>
-                    All Tasks
-                    <span class="count">12</span>
-                </button>
-                <button class="filter-pill">
-                    <i class="fas fa-spinner"></i>
-                    In Progress
-                    <span class="count">5</span>
-                </button>
-                <button class="filter-pill">
-                    <i class="fas fa-check-circle"></i>
-                    Completed
-                    <span class="count">7</span>
-                </button>
+        <!-- Task Management -->
+        <div class="task-management">
+            <div class="filters">
+                <div class="filter-pills">
+                    <button class="filter-pill active" data-filter="all">All Tasks</button>
+                    <button class="filter-pill" data-filter="active">Active</button>
+                    <button class="filter-pill" data-filter="completed">Completed</button>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search tasks...">
+                    <span class="search-shortcut">⌘K</span>
+                </div>
             </div>
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Search tasks...">
-            </div>
-        </div>
 
-        <!-- Premium Task Table -->
-        <div class="table-container">
-            <table class="task-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Status</th>
-                        <th>Delegator</th>
-                        <th>Task Description</th>
-                        <th>Account</th>
-                        <th>Project</th>
-                        <th>Billed Hours</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="task-row">
-                        <td>#55739</td>
-                        <td>
-                            <span class="status-badge working">
-                                <i class="fas fa-spinner fa-spin"></i>
-                                Working
-                            </span>
-                        </td>
-                        <td>
-                            <div class="delegator-info">
-                                <div class="name">Christian Kier</div>
-                                <div class="role">UI Designer</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="task-details">
-                                <div class="task-title">Improving the UI design of the Taskhouse</div>
-                                <div class="task-meta">
-                                    <span><i class="fas fa-calendar"></i> Due: Today</span>
-                                    <span><i class="fas fa-flag"></i> High Priority</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="account">VBN Interns</span>
-                        </td>
-                        <td>
-                            <span class="project">
-                                <i class="fas fa-code-branch"></i>
-                                Task House
-                            </span>
-                        </td>
-                        <td>
-                            <div class="hours">20.00</div>
-                        </td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="action-btn" title="View">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="action-btn" title="Delete">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- Task Table -->
+            <div class="task-table-wrapper">
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Task</th>
+                            <th>Due Date</th>
+                            <th>Priority</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Task rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
