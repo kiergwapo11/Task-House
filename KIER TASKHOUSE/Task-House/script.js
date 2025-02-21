@@ -6,35 +6,33 @@ document.addEventListener('DOMContentLoaded', function() {
         offset: 100
     });
 
-    // Get sidebar links with specific href values
-    const welcomeLink = document.querySelector('a[href="#welcome"]');
-    const tasksLink = document.querySelector('a[href="#tasks"]');
-    
-    // Get containers
-    const welcomeContainer = document.querySelector('.main-container');
-    const taskContainer = document.querySelector('.task-container');
+    // Page routing
+    const welcomeSection = document.querySelector('.main-container');
+    const taskSection = document.querySelector('.task-workspace');
+    const navLinks = document.querySelectorAll('.nav a');
 
-    // Initially show welcome and hide tasks
-    welcomeContainer.style.display = 'block';
-    taskContainer.style.display = 'none';
+    // Initially hide task section
+    taskSection.style.display = 'none';
 
-    // Add click handlers
-    tasksLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        welcomeContainer.style.display = 'none';
-        taskContainer.style.display = 'block';
-        // Update active state
-        welcomeLink.classList.remove('active');
-        tasksLink.classList.add('active');
-    });
+    // Handle navigation
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = link.getAttribute('href').substring(1);
+            
+            // Update active state
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
 
-    welcomeLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        welcomeContainer.style.display = 'block';
-        taskContainer.style.display = 'none';
-        // Update active state
-        tasksLink.classList.remove('active');
-        welcomeLink.classList.add('active');
+            // Show/hide sections
+            if (target === 'welcome') {
+                welcomeSection.style.display = 'block';
+                taskSection.style.display = 'none';
+            } else if (target === 'tasks') {
+                welcomeSection.style.display = 'none';
+                taskSection.style.display = 'block';
+            }
+        });
     });
 
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -75,37 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSearch();
     setupActionButtons();
 
-    // Fix sidebar navigation
-    const sidebarLinks = document.querySelectorAll('.nav a');
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Remove active class from all links
-            sidebarLinks.forEach(l => l.classList.remove('active'));
-            
-            // Add active class to clicked link
-            this.classList.add('active');
-            
-            // Handle content display
-            const target = this.getAttribute('href').substring(1);
-            if (target === 'welcome') {
-                welcomeContainer.style.display = 'block';
-                taskContainer.style.display = 'none';
-            } else if (target === 'tasks') {
-                welcomeContainer.style.display = 'none';
-                taskContainer.style.display = 'block';
-            }
-
-            // Close sidebar on mobile after clicking
-            if (window.innerWidth <= 992) {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                body.style.overflow = '';
-            }
-        });
-    });
-
     // Initialize clock
     updateClock();
     setInterval(updateClock, 1000);
@@ -144,11 +111,330 @@ document.addEventListener('DOMContentLoaded', function() {
     setupTableInteractions();
 
     // Initialize all components
-    initializeClock();
-    initializeFilters();
-    initializeSearch();
+    initializeModals();
+    initializeTaskFilters();
+    initializeCheckboxes();
     initializeTaskActions();
-    initializeKeyboardShortcuts();
+    initializeComments();
+    initializeAttachments();
+    
+    // Task Counter Updates
+    updateTaskCounters();
+
+    // Initialize task page features only when needed
+    function initializeTaskPage() {
+        setupTableSorting();
+        setupSearch();
+        setupActionButtons();
+        setupFilters();
+        updateTaskCounters();
+        initializeModals();
+        // ... other task-specific initializations
+    }
+
+    // Call initialization when switching to tasks page
+    document.querySelector('a[href="#tasks"]').addEventListener('click', () => {
+        initializeTaskPage();
+    });
+
+    // Initialize advanced features
+    const taskManager = new TaskManager();
+    const uiManager = new UIManager();
+    
+    class TaskManager {
+        constructor() {
+            this.tasks = [];
+            this.columns = ['todo', 'inProgress', 'completed'];
+            this.init();
+        }
+
+        init() {
+            this.loadTasks();
+            this.initializeEventListeners();
+            this.setupDragAndDrop();
+            this.updateProgress();
+            this.setupSearchShortcut();
+        }
+
+        loadTasks() {
+            // Sample tasks - replace with API call in production
+            this.tasks = [
+                {
+                    id: 'task1',
+                    title: 'Website Redesign',
+                    description: 'Update homepage layout',
+                    status: 'todo',
+                    priority: 'high',
+                    dueDate: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 hours from now
+                    category: 'design'
+                },
+                {
+                    id: 'task2',
+                    title: 'Team Meeting',
+                    description: 'Weekly sync with dev team',
+                    status: 'todo',
+                    priority: 'medium',
+                    dueDate: new Date(Date.now() + 3 * 60 * 60 * 1000), // 3 hours from now
+                    category: 'meeting'
+                }
+            ];
+            this.renderTasks();
+        }
+
+        initializeEventListeners() {
+            // Add Task Button
+            document.querySelector('.add-task').addEventListener('click', () => {
+                this.showAddTaskModal();
+            });
+
+            // Search Input
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.addEventListener('input', (e) => {
+                this.searchTasks(e.target.value);
+            });
+
+            // Task Item Interactions
+            document.querySelectorAll('.task-item').forEach(task => {
+                this.setupTaskInteractions(task);
+            });
+        }
+
+        setupDragAndDrop() {
+            this.columns.forEach(columnId => {
+                const column = document.querySelector(`#${columnId}List`);
+                new Sortable(column, {
+                    group: 'tasks',
+                    animation: 150,
+                    ghostClass: 'task-ghost',
+                    dragClass: 'task-drag',
+                    onEnd: (evt) => {
+                        this.handleTaskMove(evt);
+                    }
+                });
+            });
+        }
+
+        setupTaskInteractions(taskElement) {
+            // Double click to edit
+            taskElement.addEventListener('dblclick', () => {
+                this.showEditTaskModal(taskElement.dataset.taskId);
+            });
+
+            // Priority toggle
+            const priorityBtn = taskElement.querySelector('.priority-toggle');
+            if (priorityBtn) {
+                priorityBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleTaskPriority(taskElement.dataset.taskId);
+                });
+            }
+        }
+
+        setupSearchShortcut() {
+            document.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                    e.preventDefault();
+                    document.querySelector('.search-box input').focus();
+                }
+            });
+        }
+
+        updateProgress() {
+            const total = this.tasks.length;
+            const completed = this.tasks.filter(task => task.status === 'completed').length;
+            const percent = Math.round((completed / total) * 100) || 0;
+
+            // Update progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            const progressPercent = document.querySelector('.progress-percent');
+            
+            if (progressFill && progressPercent) {
+                progressFill.style.width = `${percent}%`;
+                progressPercent.textContent = `${percent}%`;
+            }
+
+            // Update stats
+            document.querySelector('.progress-stats').innerHTML = `
+                <span>${completed} completed</span>
+                <span>${total - completed} remaining</span>
+            `;
+        }
+
+        searchTasks(query) {
+            const normalizedQuery = query.toLowerCase();
+            document.querySelectorAll('.task-item').forEach(task => {
+                const title = task.querySelector('h3').textContent.toLowerCase();
+                const description = task.querySelector('p').textContent.toLowerCase();
+                const isMatch = title.includes(normalizedQuery) || 
+                               description.includes(normalizedQuery);
+                
+                task.style.display = isMatch ? 'block' : 'none';
+            });
+        }
+
+        handleTaskMove(evt) {
+            const taskId = evt.item.dataset.taskId;
+            const newStatus = evt.to.id.replace('List', '');
+            
+            // Update task status in data
+            const task = this.tasks.find(t => t.id === taskId);
+            if (task) {
+                task.status = newStatus;
+                this.updateProgress();
+                this.saveTasksToStorage();
+            }
+        }
+
+        formatDueDate(date) {
+            const now = new Date();
+            const diff = date - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            
+            if (hours < 24) {
+                return hours <= 1 ? '1 hour left' : `${hours} hours left`;
+            }
+            return new Date(date).toLocaleDateString();
+        }
+
+        createTaskElement(task) {
+            const taskElement = document.createElement('div');
+            taskElement.className = `task-item ${task.priority}-priority`;
+            taskElement.dataset.taskId = task.id;
+            
+            taskElement.innerHTML = `
+                <div class="task-content">
+                    <h3>${task.title}</h3>
+                    <p>${task.description}</p>
+                </div>
+                <div class="task-meta">
+                    <span class="due">${this.formatDueDate(task.dueDate)}</span>
+                    <span class="tag ${task.category}">${task.category}</span>
+                </div>
+            `;
+
+            this.setupTaskInteractions(taskElement);
+            return taskElement;
+        }
+
+        renderTasks() {
+            this.columns.forEach(status => {
+                const columnTasks = this.tasks.filter(task => task.status === status);
+                const column = document.querySelector(`#${status}List`);
+                if (column) {
+                    column.innerHTML = '';
+                    columnTasks.forEach(task => {
+                        column.appendChild(this.createTaskElement(task));
+                    });
+                }
+            });
+            this.updateProgress();
+        }
+
+        // Storage methods
+        saveTasksToStorage() {
+            localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        }
+
+        loadTasksFromStorage() {
+            const stored = localStorage.getItem('tasks');
+            if (stored) {
+                this.tasks = JSON.parse(stored);
+                this.tasks.forEach(task => {
+                    task.dueDate = new Date(task.dueDate);
+                });
+                this.renderTasks();
+            }
+        }
+    }
+
+    class UIManager {
+        constructor() {
+            this.initializeAnimations();
+            this.initializeCharts();
+            this.setupResponsiveLayout();
+        }
+
+        initializeAnimations() {
+            // Enhanced animations
+            gsap.from('.task-card', {
+                duration: 0.6,
+                y: 20,
+                opacity: 0,
+                stagger: 0.1,
+                ease: 'power2.out'
+            });
+
+            // Smooth state transitions
+            this.initializeStateTransitions();
+        }
+
+        initializeCharts() {
+            // Task distribution chart
+            const ctx = document.querySelector('.task-distribution-chart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Completed', 'In Progress', 'Pending'],
+                        datasets: [{
+                            data: [30, 45, 25],
+                            backgroundColor: ['#10b981', '#f59e0b', '#ef4444']
+                        }]
+                    },
+                    options: {
+                        cutout: '75%',
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    class TaskDashboard {
+        constructor() {
+            this.initializeDashboard();
+            this.setupEventListeners();
+        }
+
+        initializeDashboard() {
+            // Initialize task counts
+            this.updateTaskCounts({
+                total: 0,
+                inProgress: 5,
+                completed: 7
+            });
+        }
+
+        updateTaskCounts(counts) {
+            document.querySelector('[data-stat="total"] .stat-number').textContent = counts.total;
+            document.querySelector('[data-stat="in-progress"] .stat-number').textContent = counts.inProgress;
+            document.querySelector('[data-stat="completed"] .stat-number').textContent = counts.completed;
+        }
+
+        setupEventListeners() {
+            // Filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-input');
+            searchInput.addEventListener('input', (e) => {
+                // Implement search logic here
+            });
+        }
+    }
+
+    // Initialize dashboard
+    const dashboard = new TaskDashboard();
 });
 
 // Copy format text function
@@ -663,4 +949,436 @@ const styles = `
 const styleSheet = document.createElement('style');
 styleSheet.textContent = styles;
 document.head.appendChild(styleSheet);
+
+// Modal Handling
+function initializeModals() {
+    const modals = document.querySelectorAll('.modal');
+    const openModalBtns = document.querySelectorAll('[data-modal-target]');
+    const closeModalBtns = document.querySelectorAll('.close-modal');
+
+    openModalBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = document.querySelector(button.dataset.modalTarget);
+            openModal(modal);
+        });
+    });
+
+    closeModalBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal');
+            closeModal(modal);
+        });
+    });
+
+    function openModal(modal) {
+        if (modal == null) return;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modal) {
+        if (modal == null) return;
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Task Filtering
+function initializeTaskFilters() {
+    const categoryChips = document.querySelectorAll('.chip');
+    const taskRows = document.querySelectorAll('.task-row');
+    const searchInput = document.querySelector('.search-box input');
+
+    categoryChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            // Remove active class from all chips
+            categoryChips.forEach(c => c.classList.remove('active'));
+            // Add active class to clicked chip
+            chip.classList.add('active');
+            
+            const category = chip.textContent.toLowerCase();
+            filterTasks(category);
+        });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        filterTasksBySearch(searchTerm);
+    });
+
+    function filterTasks(category) {
+        taskRows.forEach(row => {
+            const taskCategory = row.querySelector('.category-dot').classList[1];
+            if (category === 'all' || taskCategory === category) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    function filterTasksBySearch(searchTerm) {
+        taskRows.forEach(row => {
+            const taskName = row.querySelector('.task-name-cell span').textContent.toLowerCase();
+            if (taskName.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+}
+
+// Checklist Functionality
+function initializeCheckboxes() {
+    const checklistItems = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+    
+    checklistItems.forEach(item => {
+        item.addEventListener('change', () => {
+            updateProgress();
+        });
+    });
+
+    function updateProgress() {
+        const total = checklistItems.length;
+        const checked = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked').length;
+        const percentage = (checked / total) * 100;
+        
+        const progressBar = document.querySelector('.progress');
+        progressBar.style.width = `${percentage}%`;
+        progressBar.querySelector('span').textContent = `${Math.round(percentage)}%`;
+    }
+}
+
+// Comment System
+function initializeComments() {
+    const commentForm = document.querySelector('.comment-form');
+    const commentsContainer = document.querySelector('.comments-section');
+
+    if (commentForm) {
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            addNewComment(e.target.elements.comment.value);
+            e.target.reset();
+        });
+    }
+
+    function addNewComment(content) {
+        const comment = createCommentElement(content);
+        commentsContainer.insertBefore(comment, commentsContainer.firstChild);
+    }
+
+    function createCommentElement(content) {
+        const comment = document.createElement('div');
+        comment.className = 'comment fade-in';
+        comment.innerHTML = `
+            <div class="comment-header">
+                <img src="avatar1.jpg" alt="User">
+                <span class="comment-author">You</span>
+                <span class="comment-time">Just now</span>
+            </div>
+            <div class="comment-content">
+                <p>${content}</p>
+            </div>
+        `;
+        return comment;
+    }
+}
+
+// File Attachments
+function initializeAttachments() {
+    const fileInput = document.querySelector('.attachment-input');
+    const attachmentsList = document.querySelector('.attachment-grid');
+
+    if (fileInput) {
+        fileInput.addEventListener('change', handleFileUpload);
+    }
+
+    function handleFileUpload(e) {
+        const files = e.target.files;
+        Array.from(files).forEach(file => {
+            addAttachment(file);
+        });
+    }
+
+    function addAttachment(file) {
+        const attachment = document.createElement('div');
+        attachment.className = 'attachment-item fade-in';
+        attachment.innerHTML = `
+            <i class="fas fa-file"></i>
+            <span>${file.name}</span>
+            <button class="download-btn">
+                <i class="fas fa-download"></i>
+            </button>
+        `;
+        attachmentsList.appendChild(attachment);
+    }
+}
+
+// Task Counter Updates
+function updateTaskCounters() {
+    const totalTasks = document.querySelectorAll('.task-row').length;
+    const completedTasks = document.querySelectorAll('.status-badge.completed').length;
+    const pendingTasks = document.querySelectorAll('.status-badge.pending').length;
+    
+    // Update stats
+    document.querySelector('.active-tasks').textContent = totalTasks - completedTasks;
+    document.querySelector('.completed-tasks').textContent = completedTasks;
+    document.querySelector('.pending-tasks').textContent = pendingTasks;
+    
+    // Update productivity
+    const productivity = (completedTasks / totalTasks) * 100;
+    document.querySelector('.productivity').textContent = `${Math.round(productivity)}%`;
+}
+
+// Assignee Functionality
+function toggleAssigneeDropdown(trigger) {
+    const wrapper = trigger.closest('.assignee-wrapper');
+    wrapper.classList.toggle('active');
+
+    // Close other open dropdowns
+    document.querySelectorAll('.assignee-wrapper.active').forEach(item => {
+        if (item !== wrapper) {
+            item.classList.remove('active');
+        }
+    });
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.assignee-wrapper')) {
+        document.querySelectorAll('.assignee-wrapper.active').forEach(wrapper => {
+            wrapper.classList.remove('active');
+        });
+    }
+});
+
+// Search functionality
+document.querySelectorAll('.search-member input').forEach(input => {
+    input.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const members = e.target.closest('.assignee-dropdown').querySelectorAll('.member-item');
+        
+        members.forEach(member => {
+            const name = member.querySelector('span').textContent.toLowerCase();
+            if (name.includes(searchTerm)) {
+                member.style.display = 'flex';
+            } else {
+                member.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Member selection
+document.querySelectorAll('.member-item').forEach(member => {
+    member.addEventListener('click', () => {
+        const wrapper = member.closest('.assignee-wrapper');
+        const trigger = wrapper.querySelector('.assignee-trigger');
+        const img = member.querySelector('img').cloneNode(true);
+        const name = member.querySelector('span').textContent;
+
+        // Update trigger content
+        trigger.querySelector('.avatar-stack').innerHTML = '';
+        trigger.querySelector('.avatar-stack').appendChild(img);
+        trigger.querySelector('.avatar-stack').innerHTML += `<span class="assignee-name">${name}</span>`;
+
+        // Update active state
+        member.closest('.team-members').querySelectorAll('.member-item').forEach(m => {
+            m.classList.remove('active');
+        });
+        member.classList.add('active');
+
+        // Close dropdown
+        wrapper.classList.remove('active');
+    });
+});
+
+class AttendanceSystem {
+    constructor() {
+        this.initializeElements();
+        this.setupEventListeners();
+        this.setupState();
+    }
+
+    initializeElements() {
+        // Get all necessary DOM elements
+        this.attendanceBtn = document.querySelector('.header-icons .icon .fa-clock').parentElement;
+        this.modal = document.querySelector('.attendance-modal');
+        this.closeBtn = document.getElementById('closeAttendanceBtn');
+        this.clockBtn = document.getElementById('clockBtn');
+        this.breakBtn = document.getElementById('breakBtn');
+        this.tableBody = document.querySelector('.table-body');
+        
+        // Create overlay
+        this.overlay = document.createElement('div');
+        this.overlay.className = 'modal-overlay';
+        document.body.appendChild(this.overlay);
+
+        // Debug
+        console.log('Attendance Button:', this.attendanceBtn);
+        console.log('Modal:', this.modal);
+    }
+
+    setupEventListeners() {
+        // Open modal on attendance icon click
+        if (this.attendanceBtn) {
+            this.attendanceBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Attendance button clicked');
+                this.openModal();
+            });
+        }
+
+        // Close modal handlers
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => this.closeModal());
+        }
+
+        // Overlay click to close
+        this.overlay.addEventListener('click', () => this.closeModal());
+
+        // Escape key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') this.closeModal();
+        });
+
+        // Clock button handler
+        if (this.clockBtn) {
+            this.clockBtn.addEventListener('click', () => this.handleClockAction());
+        }
+
+        // Break button handler
+        if (this.breakBtn) {
+            this.breakBtn.addEventListener('click', () => this.handleBreakAction());
+        }
+    }
+
+    openModal() {
+        console.log('Opening attendance modal');
+        if (this.modal && this.overlay) {
+            this.modal.style.display = 'block';
+            this.overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            this.updateDisplay();
+        }
+    }
+
+    closeModal() {
+        console.log('Closing attendance modal');
+        if (this.modal && this.overlay) {
+            this.modal.style.display = 'none';
+            this.overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    }
+
+    setupState() {
+        this.isClockIn = true;
+        this.isOnBreak = false;
+        this.attendanceData = this.loadAttendanceData();
+        this.currentSession = null;
+    }
+
+    updateDisplay() {
+        // Update attendance table and stats
+        this.renderAttendanceTable();
+        this.updateStats();
+    }
+
+    handleClockAction() {
+        const now = new Date();
+        if (this.isClockIn) {
+            // Clock In
+            this.clockIn(now);
+        } else {
+            // Clock Out
+            this.clockOut(now);
+        }
+        this.updateDisplay();
+    }
+
+    clockIn(time) {
+        this.currentSession = {
+            date: time.toLocaleDateString(),
+            clockIn: time.toLocaleTimeString(),
+            clockOut: null,
+            breakTime: '00:00',
+            totalHours: '00:00',
+            status: 'Present'
+        };
+        this.attendanceData.push(this.currentSession);
+        this.isClockIn = false;
+        this.clockBtn.innerHTML = '<i class="fas fa-clock"></i> Clock Out';
+        this.breakBtn.disabled = false;
+    }
+
+    clockOut(time) {
+        if (this.currentSession) {
+            this.currentSession.clockOut = time.toLocaleTimeString();
+            this.currentSession.totalHours = this.calculateHours(this.currentSession);
+            this.isClockIn = true;
+            this.clockBtn.innerHTML = '<i class="fas fa-clock"></i> Clock In';
+            this.breakBtn.disabled = true;
+            this.saveAttendanceData();
+        }
+    }
+
+    loadAttendanceData() {
+        const saved = localStorage.getItem('attendanceData');
+        return saved ? JSON.parse(saved) : [];
+    }
+
+    saveAttendanceData() {
+        localStorage.setItem('attendanceData', JSON.stringify(this.attendanceData));
+    }
+
+    calculateHours(session) {
+        // Add time calculation logic here
+        return '8:00'; // Placeholder
+    }
+
+    renderAttendanceTable() {
+        if (!this.tableBody) return;
+        
+        this.tableBody.innerHTML = this.attendanceData.map((record, index) => `
+            <div class="table-row">
+                <div>${index + 1}</div>
+                <div>${record.date}</div>
+                <div>${record.clockIn}</div>
+                <div>${record.clockOut || '--:--'}</div>
+                <div>${record.breakTime}</div>
+                <div>${record.totalHours}</div>
+                <div class="status ${record.status.toLowerCase()}">${record.status}</div>
+                <div class="actions">
+                    <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    updateStats() {
+        // Update statistics display
+        const stats = this.calculateStats();
+        document.getElementById('presentCount').textContent = stats.presentDays;
+        document.getElementById('workingHours').textContent = stats.totalHours;
+        document.getElementById('breakTime').textContent = stats.totalBreak;
+    }
+
+    calculateStats() {
+        return {
+            presentDays: this.attendanceData.length,
+            totalHours: '0h',
+            totalBreak: '0h'
+        };
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const attendance = new AttendanceSystem();
+    // Make it globally accessible for debugging
+    window.attendanceSystem = attendance;
+});
 

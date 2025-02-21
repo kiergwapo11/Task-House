@@ -76,150 +76,192 @@
         </div>
     </div>
 
-    <div class="task-container">
-        <!-- Dashboard Header -->
-        <div class="dashboard-header">
-            <div class="header-content">
-                <div class="header-left">
-                    <div class="header-title">
-                        <div class="header-icon">
-                            <i class="fas fa-tasks"></i>
-                        </div>
-                        <div>
-                            <h1>My Tasks Dashboard</h1>
-                            <span class="active-task-badge">
-                                <span class="pulse-dot"></span>
-                                1 Active Task
-                            </span>
-                        </div>
-                    </div>
+    <div class="task-workspace" style="display: none;">
+        <div class="task-header">
+            <h1>Task Dashboard</h1>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search tasks..." class="search-input">
+                    <button class="quick-search">Quick search</button>
                 </div>
-                <button class="create-task-btn">
-                    <i class="fas fa-plus"></i>
-                    Create Task
-                </button>
+                <button class="create-task">Create Task</button>
             </div>
         </div>
 
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-info">
-                    <h3>Current Time</h3>
-                    <span class="stat-value" id="currentTime">--:--:-- AM</span>
-                </div>
+        <div class="task-filters">
+            <div class="filter-buttons">
+                <button class="filter-btn active">All Tasks</button>
+                <button class="filter-btn">Pending</button>
+                <button class="filter-btn">In Progress</button>
+                <button class="filter-btn">Completed</button>
             </div>
+        </div>
+
+        <div class="task-stats">
             <div class="stat-card">
                 <div class="stat-icon">
-                    <i class="fas fa-list-check"></i>
+                    <i class="fas fa-list"></i>
                 </div>
                 <div class="stat-info">
                     <h3>Total Tasks</h3>
-                    <span class="stat-value">12</span>
+                    <span class="stat-number">0</span>
                 </div>
             </div>
+
             <div class="stat-card">
                 <div class="stat-icon">
                     <i class="fas fa-spinner"></i>
                 </div>
                 <div class="stat-info">
                     <h3>In Progress</h3>
-                    <span class="stat-value">5</span>
+                    <span class="stat-number">5</span>
                 </div>
             </div>
-        </div>
-        
-        <!-- Task Management -->
-        <div class="task-management">
-            <div class="filters">
-                <div class="filter-pills">
-                    <button class="filter-pill active" data-filter="all">All Tasks</button>
-                    <button class="filter-pill" data-filter="active">Active</button>
-                    <button class="filter-pill" data-filter="completed">Completed</button>
-                </div>
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search tasks...">
-                    <span class="search-shortcut">⌘K</span>
-                </div>
-            </div>
-            
-            <!-- Task Table -->
-            <div class="task-table-wrapper">
-                <table class="task-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Status</th>
-                            <th>Task</th>
-                            <th>Due Date</th>
-                            <th>Priority</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Task rows will be dynamically added here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div> 
-    
 
-    <!-- Premium Modal -->
-    <div class="modal" id="addTaskModal">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Completed</h3>
+                    <span class="stat-number">7</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Creation Modal -->
+    <div class="modal" id="createTaskModal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">
-                    <i class="fas fa-plus-circle"></i>
-                    <h2>Create New Task</h2>
-                </div>
+                <h2>Create New Task</h2>
                 <button class="close-modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
-            <form id="addTaskForm" class="premium-form">
+            <form class="task-form">
                 <div class="form-group">
-                    <label>Account Name</label>
-                    <div class="select-wrapper">
-                        <select required>
-                            <option value="">Select Account</option>
-                            <option value="VBN Interns">VBN Interns</option>
-                        </select>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
+                    <label>Task Title</label>
+                    <input type="text" name="title" required>
                 </div>
-                
-                <div class="form-group">
-                    <label>Task Description</label>
-                    <textarea rows="4" placeholder="Enter task details..." required></textarea>
-                </div>
-                
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Available Time</label>
-                        <input type="text" value="9:33:00" readonly>
+                        <label>Priority</label>
+                        <select name="priority" required>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
                     </div>
-                    
                     <div class="form-group">
-                        <label>Billed Hours</label>
-                        <div class="time-inputs">
-                            <input type="number" placeholder="HH" min="0" max="24" required>
-                            <span class="time-separator">:</span>
-                            <input type="number" placeholder="MM" min="0" max="59" required>
-                        </div>
+                        <label>Due Date</label>
+                        <input type="date" name="dueDate" required>
                     </div>
                 </div>
-                
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tags</label>
+                    <div class="tags-input">
+                        <input type="text" placeholder="Add tags...">
+                        <div class="tags-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Assignee</label>
+                    <select name="assignee" required>
+                        <!-- Add team members here -->
+                    </select>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-secondary">Cancel</button>
                     <button type="submit" class="btn-primary">Create Task</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Attendance Modal -->
+    <div class="attendance-modal">
+        <div class="modal-header">
+            <div class="header-left">
+                <i class="fas fa-calendar-check"></i>
+                <h2>Attendance Dashboard</h2>
+            </div>
+            <div class="date-selector">
+                <button class="date-nav prev"><i class="fas fa-chevron-left"></i></button>
+                <span class="current-date">February 16 - February 22, 2025</span>
+                <button class="date-nav next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <button type="button" class="close-modal" id="closeAttendanceBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="attendance-stats">
+            <div class="stat-card">
+                <div class="stat-icon present">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>Present Days</h4>
+                    <span class="stat-number" id="presentCount">0</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon working">
+                    <i class="fas fa-business-time"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>Working Hours</h4>
+                    <span class="stat-number" id="workingHours">0h</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon break">
+                    <i class="fas fa-coffee"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>Break Time</h4>
+                    <span class="stat-number" id="breakTime">0h</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="attendance-content">
+            <div class="attendance-table">
+                <div class="table-header">
+                    <div class="header-cell">#</div>
+                    <div class="header-cell">Date</div>
+                    <div class="header-cell">Clock In</div>
+                    <div class="header-cell">Clock Out</div>
+                    <div class="header-cell">Break</div>
+                    <div class="header-cell">Total Hours</div>
+                    <div class="header-cell">Status</div>
+                    <div class="header-cell">Actions</div>
+                </div>
+                <div class="table-body"></div>
+            </div>
+        </div>
+
+        <div class="attendance-actions">
+            <div class="status-legend">
+                <span class="status-dot present">Present</span>
+                <span class="status-dot break">Break</span>
+                <span class="status-dot absent">Absent</span>
+            </div>
+            <div class="action-buttons">
+                <button class="break-btn" id="breakBtn">
+                    <i class="fas fa-coffee"></i>
+                    Take Break
+                </button>
+                <button class="clock-btn" id="clockBtn">
+                    <i class="fas fa-clock"></i>
+                    Clock In
+                </button>
+            </div>
         </div>
     </div>
 
