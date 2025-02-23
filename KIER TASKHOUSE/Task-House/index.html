@@ -21,7 +21,7 @@
         <div class="header-icons">
             <a href="mailto:careers@virtualbiznest.com" class="icon"><i class="fas fa-envelope"></i></a>
             <a href="#" class="icon"><i class="fas fa-clock"></i></a>
-            <a href="#" class="icon"><i class="fas fa-camera"></i></a>
+            <a href="#" class="icon"><i class="fas fa-camera"></i></a>          
             <button class="settings-btn"><i class="fas fa-cog"></i></button>
             <div class="settings-dropdown">
                 <a href="mailto:careers@virtualbiznest.com"><i class="fas fa-envelope"></i> Email</a>
@@ -183,84 +183,74 @@
         </div>
     </div>
 
+    <!-- Modal Overlay -->
+    <div class="modal-overlay"></div>
+
     <!-- Attendance Modal -->
-    <div class="attendance-modal">
-        <div class="modal-header">
-            <div class="header-left">
-                <i class="fas fa-calendar-check"></i>
-                <h2>Attendance Dashboard</h2>
-            </div>
-            <div class="date-selector">
-                <button class="date-nav prev"><i class="fas fa-chevron-left"></i></button>
-                <span class="current-date">February 16 - February 22, 2025</span>
-                <button class="date-nav next"><i class="fas fa-chevron-right"></i></button>
-            </div>
-            <button type="button" class="close-modal" id="closeAttendanceBtn">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
+    <div id="attendanceModal" class="attendance-modal">
+        <div class="attendance-dashboard">
+            <!-- Left Panel -->
+            <div class="attendance-sidebar">
+                <div class="time-display">
+                    <div class="digital-clock">09:41:23</div>
+                    <div class="date-info">
+                        <div class="current-date">Monday, January 15, 2024</div>
+                        <div class="timezone">GMT+8</div>
+                    </div>
+                </div>
 
-        <div class="attendance-stats">
-            <div class="stat-card">
-                <div class="stat-icon present">
-                    <i class="fas fa-user-check"></i>
+                <div class="status-card">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span class="status-text">Not Working</span>
+                    </div>
+                    <div class="work-duration">
+                        <label>Today's Work Duration</label>
+                        <h3>0h 0m</h3>
+                    </div>
                 </div>
-                <div class="stat-info">
-                    <h4>Present Days</h4>
-                    <span class="stat-number" id="presentCount">0</span>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon working">
-                    <i class="fas fa-business-time"></i>
-                </div>
-                <div class="stat-info">
-                    <h4>Working Hours</h4>
-                    <span class="stat-number" id="workingHours">0h</span>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon break">
-                    <i class="fas fa-coffee"></i>
-                </div>
-                <div class="stat-info">
-                    <h4>Break Time</h4>
-                    <span class="stat-number" id="breakTime">0h</span>
-                </div>
-            </div>
-        </div>
 
-        <div class="attendance-content">
-            <div class="attendance-table">
-                <div class="table-header">
-                    <div class="header-cell">#</div>
-                    <div class="header-cell">Date</div>
-                    <div class="header-cell">Clock In</div>
-                    <div class="header-cell">Clock Out</div>
-                    <div class="header-cell">Break</div>
-                    <div class="header-cell">Total Hours</div>
-                    <div class="header-cell">Status</div>
-                    <div class="header-cell">Actions</div>
+                <div class="attendance-actions">
+                    <button class="action-button clock-in-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Clock In</span>
+                    </button>
+                    <button class="action-button break-btn" disabled>
+                        <i class="fas fa-coffee"></i>
+                        <span>Take Break</span>
+                    </button>
                 </div>
-                <div class="table-body"></div>
             </div>
-        </div>
 
-        <div class="attendance-actions">
-            <div class="status-legend">
-                <span class="status-dot present">Present</span>
-                <span class="status-dot break">Break</span>
-                <span class="status-dot absent">Absent</span>
-            </div>
-            <div class="action-buttons">
-                <button class="break-btn" id="breakBtn">
-                    <i class="fas fa-coffee"></i>
-                    Take Break
-                </button>
-                <button class="clock-btn" id="clockBtn">
-                    <i class="fas fa-clock"></i>
-                    Clock In
-                </button>
+            <!-- Right Panel -->
+            <div class="attendance-main">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Weekly Hours</h4>
+                        <h2>32.5h</h2>
+                        <div class="stat-progress">
+                            <div class="progress-bar" style="width: 81.25%"></div>
+                        </div>
+                        <span class="stat-target">Target: 40h</span>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Break Time</h4>
+                        <h2>1.5h</h2>
+                        <span class="stat-label">Today</span>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Productivity</h4>
+                        <h2>85%</h2>
+                        <span class="stat-label">This Week</span>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <h3>Today's Activity</h3>
+                    <div class="timeline-container">
+                        <!-- Timeline items will be added dynamically -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
