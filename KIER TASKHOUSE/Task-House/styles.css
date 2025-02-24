@@ -4439,318 +4439,19 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 1200px;
-    height: 90vh;
-    background: white;
-    border-radius: 15px;
-    z-index: 10000;
-    display: none;
-    overflow-y: auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.modal-header {
-    position: sticky;
-    top: 0;
-    background: white;
-    padding: 1.5rem;
-    border-bottom: 1px solid #edf2f7;
-    border-radius: 15px 15px 0 0;
-}
-
-.attendance-content {
-    padding: 1.5rem;
-}
-
-/* Animation classes */
-.modal-active {
-    display: block !important;
-    animation: modalFadeIn 0.3s ease;
-}
-
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -48%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
-/* Enhanced Modal Styles */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%;
-    max-width: 1400px;
-    height: 90vh;
-    background: #f8fafc;
-    border-radius: 20px;
-    z-index: 10000;
-    display: none;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.attendance-dashboard {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 2rem;
-    padding: 1.5rem;
-    height: calc(100% - 70px);
-    overflow: hidden;
-}
-
-/* Time Tracking Section */
-.time-tracking-section {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.current-session {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.time-progress-ring {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: conic-gradient(var(--primary-color) 75%, #e2e8f0 0);
-    position: relative;
-}
-
-.session-details {
-    flex: 1;
-}
-
-.session-time {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0.5rem 0;
-}
-
-/* Quick Actions */
-.quick-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.action-button {
-    flex: 1;
-    padding: 1rem;
-    border-radius: 12px;
-    border: none;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-/* Analytics Section */
-.analytics-section {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    margin-top: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.chart-container {
-    height: 250px;
-    margin-bottom: 2rem;
-}
-
-/* Calendar Heatmap */
-.attendance-calendar {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .attendance-dashboard {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Attendance Modal Styles */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    display: none;
-    overflow: hidden;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    background: #10b981;
-    border-radius: 50%;
-}
-
-.attendance-content {
-    height: calc(100% - 70px);
-    padding: 24px;
-    overflow-y: auto;
-}
-
-.attendance-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    height: 100%;
-}
-
-/* Time Section Styles */
-.time-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: #f8fafc;
-    border-radius: 16px;
-    padding: 24px;
-}
-
-.time-circle {
-    width: 280px;
-    height: 280px;
-    margin: 24px auto;
-    background: conic-gradient(var(--primary-color) 75%, #e2e8f0 25%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.time-display {
-    font-size: 2.5rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-}
-
-.total-hours {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: white;
-    padding: 16px;
-    border-radius: 12px;
-    margin-top: auto;
-}
-
-/* History Section Styles */
-.history-section {
-    background: #f8fafc;
-    border-radius: 16px;
-    padding: 24px;
-    height: 100%;
-    overflow-y: auto;
-}
-
-.search-filter {
-    display: flex;
-    gap: 12px;
-    margin: 16px 0;
-}
-
-.search-filter input {
-    flex: 1;
-    padding: 8px 16px;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-}
-
-.filter-options {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-}
-
-.export-btn {
-    margin-left: auto;
-    padding: 8px 16px;
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .attendance-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Add these styles */
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    width: 90%;
     max-width: 400px;
+    background: white;
+    border-radius: 12px;
+    z-index: 999;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #edf2f7;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .close-modal {
@@ -4758,155 +4459,20 @@ body {
     border: none;
     font-size: 24px;
     cursor: pointer;
+    color: #64748b;
 }
 
-.time-display {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.time {
-    font-size: 48px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.attendance-actions {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.attendance-actions button {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.clock-in-btn {
-    background: #4CAF50;
-    color: white;
-}
-
-.break-btn {
-    background: #FFA726;
-    color: white;
-}
-
-.attendance-status {
-    border-top: 1px solid #eee;
-    padding-top: 20px;
-}
-
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
-
-/* Add these styles at the end of your CSS file */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-}
-
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-    width: 90%;
-    max-width: 400px;
-}
-
-.attendance-modal .modal-content {
+.modal-body {
     padding: 20px;
 }
 
-.attendance-modal .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
-}
-
-.attendance-modal .close-modal {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 0;
-}
-
-.attendance-modal .time-display {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.attendance-modal .time {
-    font-size: 36px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.attendance-modal .attendance-actions {
-    display: flex;
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.attendance-modal .clock-in-btn,
-.attendance-modal .break-btn {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-}
-
-.attendance-modal .clock-in-btn {
-    background: #4CAF50;
-}
-
-.attendance-modal .break-btn {
-    background: #FFA726;
-}
-
-.attendance-modal .attendance-status {
-    border-top: 1px solid #eee;
-    padding-top: 15px;
-    margin-top: 15px;
-}
-
-/* Show modal and overlay */
-.attendance-modal.show,
-.modal-overlay.show {
+/* Show classes */
+.modal-overlay.show,
+.attendance-modal.show {
     display: block;
 }
 
-/* Remove all existing modal styles and replace with these */
+/* Remove all duplicate modal styles and keep just one clean version */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -4915,6 +4481,7 @@ body {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
     z-index: 998;
 }
 
@@ -5978,4 +5545,2192 @@ body {
 .attendance-modal {
     filter: none !important;
     pointer-events: auto !important;
+}
+
+/* Add these new styles to your existing CSS */
+
+:root {
+    /* Add these to your existing root variables */
+    --primary-color: #10b981;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --transition-smooth: all 0.3s ease;
+    --hover-bg: rgba(0, 0, 0, 0.05);
+    --border: #e2e8f0;
+    --gradient-end: #0d9488;
+    --primary-light: rgba(16, 185, 129, 0.1);
+}
+
+/* Modern Attendance Modal */
+.attendance-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 90%;
+    max-width: 1200px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(249, 250, 251, 0.95));
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    z-index: 999;
+    display: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.attendance-modal.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.attendance-dashboard {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 24px;
+    padding: 24px;
+    height: 80vh;
+    max-height: 700px;
+}
+
+/* Left Panel Styles */
+.attendance-sidebar {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 24px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.time-display {
+    text-align: center;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.digital-clock {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'SF Mono', monospace;
+    margin-bottom: 8px;
+}
+
+/* Progress Ring */
+.progress-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+}
+
+.progress-ring svg {
+    transform: rotate(-90deg);
+}
+
+.progress-ring circle {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+
+.progress-ring .background {
+    stroke: #e2e8f0;
+}
+
+.progress-ring .progress-circle {
+    stroke: var(--primary-color);
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Status Card */
+.status-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #9ca3af;
+    position: relative;
+}
+
+.status-dot::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+}
+
+.status-dot.active { background: var(--success); }
+.status-dot.break { background: var(--warning); }
+
+/* Action Buttons */
+.attendance-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.action-button {
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 1rem;
+}
+
+.clock-in-btn {
+    background: var(--success);
+    color: white;
+}
+
+.clock-in-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.break-btn {
+    background: #f8fafc;
+    color: #64748b;
+}
+
+.break-btn:not(:disabled):hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
+
+.break-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Timeline */
+.timeline {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 24px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.timeline-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-icon.start { background: var(--success); }
+.timeline-icon.break { background: var(--warning); }
+.timeline-icon.end { background: var(--danger); }
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.stat-progress {
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    margin: 12px 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, #10b981, #34d399);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .attendance-dashboard {
+        grid-template-columns: 1fr;
+        height: auto;
+        max-height: none;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        height: auto;
+    }
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    display: none;
+}
+
+/* Blur effect for background */
+.blur-background {
+    filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.3s ease;
+}
+
+/* Modern Attendance Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+}
+
+.attendance-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 90%;
+    max-width: 1200px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.attendance-modal.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.attendance-dashboard {
+    display: flex;
+    height: 700px;
+}
+
+/* Left Panel Styles */
+.attendance-sidebar {
+    width: 380px;
+    padding: 32px;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border-right: 1px solid #e2e8f0;
+}
+
+.time-display {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.digital-clock {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #0f172a;
+    font-family: 'SF Mono', monospace;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+}
+
+.date-info {
+    color: #64748b;
+}
+
+.current-date {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.timezone {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.status-card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background: #cbd5e1;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.status-dot.active {
+    background: #10b981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.status-dot.break {
+    background: #f59e0b;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+}
+
+.status-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #0f172a;
+}
+
+.work-duration {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.work-duration label {
+    display: block;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.work-duration h3 {
+    font-size: 2rem;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+/* Progress Ring */
+.progress-ring {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+}
+
+.progress-ring svg {
+    transform: rotate(-90deg);
+}
+
+.progress-ring circle {
+    fill: none;
+    stroke-linecap: round;
+}
+
+.progress-ring .background {
+    stroke: #f1f5f9;
+    stroke-width: 12;
+}
+
+.progress-ring .progress-circle {
+    stroke: #10b981;
+    stroke-width: 12;
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Action Buttons */
+.attendance-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.action-button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.clock-in-btn {
+    background: #10b981;
+    color: white;
+}
+
+.clock-in-btn:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+.break-btn {
+    background: #f59e0b;
+    color: white;
+}
+
+.break-btn:hover {
+    background: #d97706;
+    transform: translateY(-1px);
+}
+
+.action-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Right Panel */
+.attendance-main {
+    flex: 1;
+    padding: 32px;
+    background: white;
+    overflow-y: auto;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h4 {
+    color: #64748b;
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+
+.stat-card h2 {
+    color: #0f172a;
+    font-size: 2rem;
+    margin-bottom: 16px;
+}
+
+.stat-progress {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #10b981;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.stat-target {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Timeline */
+.timeline {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.timeline h3 {
+    color: #0f172a;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+}
+
+.timeline-item:hover {
+    transform: translateX(4px);
+}
+
+.timeline-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.timeline-icon.start { background: #10b981; }
+.timeline-icon.break { background: #f59e0b; }
+.timeline-icon.end { background: #ef4444; }
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-action {
+    color: #0f172a;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.timeline-time {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Chart Containers */
+.productivity-chart,
+.weekly-chart {
+    height: 200px;
+    margin-top: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .attendance-dashboard {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .attendance-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modal Overlay with Blur */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(12px);
+    z-index: 999;
+}
+
+/* Enhanced Modal Layout */
+.attendance-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    max-width: 1600px;
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+/* Left Panel Styling */
+.attendance-left {
+    background: #f8fafc;
+    padding: 32px;
+    border-right: 1px solid #e2e8f0;
+}
+
+/* Time Display */
+.time-display {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.digital-clock {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #0ea5e9;
+    margin-bottom: 8px;
+}
+
+.date-info {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+/* Status and Controls */
+.work-status {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #cbd5e1;
+}
+
+.status-dot.active {
+    background: #10b981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-start {
+    background: #10b981;
+    color: white;
+}
+
+.btn-break {
+    background: #f59e0b;
+    color: white;
+}
+
+/* Right Panel Content */
+.attendance-right {
+    padding: 32px;
+    background: white;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card h3 {
+    color: #64748b;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+/* Progress Bar */
+.progress-bar {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 12px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #10b981;
+    border-radius: 4px;
+    width: 75%;
+}
+
+/* Activity Timeline */
+.timeline {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 16px;
+    margin-top: 24px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.timeline-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.icon-start { background: #10b981; }
+.icon-break { background: #f59e0b; }
+.icon-end { background: #ef4444; }
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .attendance-modal {
+        grid-template-columns: 1fr;
+        height: 95vh;
+        overflow-y: auto;
+    }
+
+    .attendance-left {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+}
+
+@media (max-width: 640px) {
+    .attendance-modal {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .digital-clock {
+        font-size: 2.5rem;
+    }
+}
+
+/* Left Panel Container */
+.attendance-left {
+    background: #f8fafc;
+    padding: 24px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Time Display Card */
+.time-display {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    position: relative;
+}
+
+.digital-clock {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #0ea5e9;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.date-info {
+    color: #64748b;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.timezone {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Status Indicator */
+.status-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbd5e1;
+}
+
+/* Work Duration Card */
+.work-duration {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin: 20px 0;
+}
+
+.duration-label {
+    color: #64748b;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.duration-time {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Progress Circle */
+.progress-circle {
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+    position: relative;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-start {
+    background: #10b981;
+    color: white;
+}
+
+.btn-start:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+.btn-break {
+    background: #fcd34d;
+    color: #92400e;
+}
+
+.btn-break:hover {
+    background: #fbbf24;
+    transform: translateY(-1px);
+}
+
+/* Container Fixes */
+.attendance-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Card Wrapper */
+.card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .attendance-left {
+        padding: 16px;
+    }
+
+    .digital-clock {
+        font-size: 2.8rem;
+    }
+
+    .status-indicator {
+        top: 16px;
+        right: 16px;
+    }
+}
+
+/* Modern Attendance Styles */
+.attendance-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.attendance-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.attendance-container.active,
+.attendance-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.attendance-wrapper {
+    width: 95%;
+    max-width: 1200px;
+    height: 85vh;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    overflow: hidden;
+}
+
+/* Sidebar Styles */
+.attendance-sidebar {
+    background: #f8fafc;
+    padding: 32px;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.time-widget {
+    text-align: center;
+}
+
+.digital-clock {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'SF Mono', monospace;
+    letter-spacing: -1px;
+}
+
+.date-info {
+    margin-top: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Status Widget */
+.status-widget {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.status-ring {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 24px;
+}
+
+.ring-bg, .ring-progress {
+    fill: none;
+    stroke-width: 12;
+}
+
+.ring-bg {
+    stroke: #e2e8f0;
+}
+
+.ring-progress {
+    stroke: var(--primary-color);
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.ring-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.work-percentage {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.work-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Status Badge */
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #94a3b8;
+}
+
+.status-dot.active {
+    background: #10b981;
+}
+
+.status-dot.break {
+    background: #f59e0b;
+}
+
+/* Action Buttons */
+.action-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background: #f1f5f9;
+    color: var(--text-secondary);
+}
+
+.btn-secondary:not(:disabled):hover {
+    background: #e2e8f0;
+}
+
+/* Main Content */
+.attendance-main {
+    padding: 32px;
+    overflow-y: auto;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .attendance-wrapper {
+        grid-template-columns: 1fr;
+        height: 95vh;
+    }
+
+    .attendance-sidebar {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Add these styles for the attendance modal */
+.attendance-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 380px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.attendance-content {
+    padding: 32px;
+    text-align: center;
+}
+
+/* Digital Clock */
+.time-display {
+    margin-bottom: 24px;
+}
+
+.digital-time {
+    font-size: 48px;
+    font-weight: 700;
+    color: #00c853;
+    font-family: 'SF Mono', monospace;
+    letter-spacing: 2px;
+}
+
+.date-info {
+    color: #64748b;
+    margin-top: 8px;
+}
+
+/* Progress Circle */
+.progress-circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 24px;
+}
+
+.progress-circle svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.progress-bg {
+    fill: none;
+    stroke: #f1f5f9;
+    stroke-width: 8;
+}
+
+.progress-ring {
+    fill: none;
+    stroke: #00c853;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.progress-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.time-worked {
+    font-size: 1.25rem;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.percentage {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00c853;
+}
+
+/* Status Badge */
+.work-status {
+    margin-bottom: 24px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #f8fafc;
+    border-radius: 20px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #94a3b8;
+}
+
+.status-dot.active {
+    background: #00c853;
+}
+
+.status-dot.break {
+    background: #f59e0b;
+}
+
+/* Control Buttons */
+.control-buttons {
+    display: grid;
+    gap: 12px;
+}
+
+.control-buttons button {
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.start-work {
+    background: #00c853;
+    color: white;
+}
+
+.break-btn {
+    background: #f8fafc;
+    color: #64748b;
+}
+
+.break-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #f8fafc;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.close-modal:hover {
+    background: #e2e8f0;
+}
+
+.attendance-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    width: 90%;
+    max-width: 360px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Time Display */
+.time-container {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.digital-time {
+    font-size: 48px;
+    font-weight: 600;
+    color: #00C853;
+    font-family: 'SF Mono', monospace;
+}
+
+.date-display {
+    color: #666;
+    margin-top: 8px;
+}
+
+/* Progress Circle */
+.progress-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 24px;
+}
+
+.progress-circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-bg {
+    fill: none;
+    stroke: #f0f0f0;
+    stroke-width: 8;
+}
+
+.progress-ring {
+    fill: none;
+    stroke: #00C853;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s ease;
+}
+
+.progress-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.time-worked {
+    display: block;
+    color: #666;
+}
+
+.percentage {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    color: #00C853;
+}
+
+/* Status Badge */
+.status-badge {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #f5f5f5;
+    border-radius: 20px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #999;
+}
+
+/* Control Buttons */
+.control-buttons {
+    display: grid;
+    gap: 12px;
+}
+
+.control-buttons button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.start-work {
+    background: #00C853;
+    color: white;
+}
+
+.take-break {
+    background: #D4A017;
+    color: white;
+}
+
+.take-break:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+}
+
+/* Advanced Attendance Modal Styles */
+.attendance-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+}
+
+/* Glassmorphism Effect */
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Neon Time Display */
+.digital-clock {
+    font-family: 'SF Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    background: linear-gradient(to right, #00FF47, #00CC3A);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(0, 255, 71, 0.4);
+    margin-bottom: 8px;
+}
+
+/* Progress Circle Enhancements */
+.progress-ring-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.progress-ring {
+    stroke: url(#progressGradient);
+    stroke-width: 8;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 10px rgba(0, 255, 71, 0.3));
+}
+
+.progress-dot {
+    fill: #00FF47;
+    filter: drop-shadow(0 0 5px rgba(0, 255, 71, 0.5));
+    transition: all 0.3s ease;
+}
+
+/* Interactive Button Styles */
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Enhanced Status Indicator */
+.status-dot.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 255, 71, 0.7);
+    }
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(0, 255, 71, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 255, 71, 0);
+    }
+}
+
+/* Achievement Notification */
+.achievement {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateX(120%);
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Analytics Panel */
+.analytics-panel {
+    margin-top: 24px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-icon {
+    font-size: 24px;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: #00FF47;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .attendance-modal {
+        width: 90%;
+        padding: 24px;
+    }
+
+    .digital-clock {
+        font-size: 36px;
+    }
+
+    .progress-ring-wrapper {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* Advanced Attendance System Styles */
+.attendance-system-modal {
+    --primary: #2563eb;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --surface: #ffffff;
+    --surface-dark: #f3f4f6;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1200px;
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 
+        0 0 0 1px rgba(0, 0, 0, 0.05),
+        0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+}
+
+/* Modern Header Styles */
+.attendance-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.time-section {
+    text-align: left;
+}
+
+.current-time {
+    font-family: 'SF Mono', monospace;
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), #1d4ed8);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px rgba(37, 99, 235, 0.3);
+    margin-bottom: 8px;
+}
+
+.date-display {
+    display: flex;
+    gap: 12px;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* User Status Styles */
+.user-status {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    background: var(--surface-dark);
+    border-radius: 16px;
+}
+
+.avatar-wrapper {
+    position: relative;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--success);
+    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 2px var(--success);
+}
+
+/* Circular Progress */
+.main-tracker {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.circular-progress {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.circular-progress svg {
+    transform: rotate(-90deg);
+}
+
+.progress-bg {
+    fill: none;
+    stroke: var(--surface-dark);
+    stroke-width: 8;
+}
+
+.progress-ring {
+    fill: none;
+    stroke: url(#progress-gradient);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.progress-wave {
+    fill: none;
+    stroke: rgba(37, 99, 235, 0.2);
+    stroke-width: 2;
+    animation: wave 3s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { d: path('M 0,50 C 30,40 70,60 100,50'); }
+    50% { d: path('M 0,50 C 30,60 70,40 100,50'); }
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.stat-card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.stat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.stat-header i {
+    font-size: 1.25rem;
+    color: var(--primary);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+/* Control Buttons */
+.work-controls {
+    display: flex;
+    gap: 16px;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.start-work {
+    background: var(--primary);
+    color: white;
+}
+
+.take-break {
+    background: var(--warning);
+    color: white;
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Quick Actions */
+.attendance-footer {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--surface-dark);
+}
+
+.quick-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 1px solid var(--surface-dark);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.action-btn:hover {
+    background: var(--surface-dark);
+    color: var(--text-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .main-tracker {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .circular-progress {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .attendance-header {
+        grid-template-columns: 1fr;
+    }
+
+    .current-time {
+        font-size: 2.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Add these styles to your existing CSS */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.attendance-system-modal {
+    /* Previous styles remain the same */
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -60%);
+    transition: all 0.3s ease;
+}
+
+.attendance-system-modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+}
+
+/* Update the modal overlay with stronger blur and darker background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Darker overlay */
+    backdrop-filter: blur(12px); /* Stronger blur */
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Update attendance modal with new color scheme */
+.attendance-system-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 90%;
+    max-width: 1000px;
+    background: #1a1a2e; /* Dark blue background */
+    color: #ffffff; /* White text */
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.attendance-system-modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+}
+
+/* Update time display for better visibility */
+.attendance-system-modal .current-time {
+    color: #4fd1c5; /* Cyan accent color */
+    font-size: 3.5rem;
+    font-weight: 600;
+}
+
+.attendance-system-modal .date-display {
+    color: #a0aec0; /* Light gray for secondary text */
+}
+
+/* Update stat cards within the modal */
+.attendance-system-modal .stat-card {
+    background: #252547; /* Slightly lighter dark blue */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+}
+
+/* Update buttons within the modal */
+.attendance-system-modal .control-btn {
+    background: #4fd1c5; /* Cyan buttons */
+    color: #1a1a2e;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.attendance-system-modal .control-btn:hover {
+    background: #38b2ac; /* Darker cyan on hover */
+    transform: translateY(-2px);
+}
+
+/* Update progress circle */
+.attendance-system-modal .progress-ring {
+    stroke: #4fd1c5; /* Cyan progress indicator */
+}
+
+.attendance-system-modal .progress-bg {
+    stroke: rgba(255, 255, 255, 0.1); /* Subtle background circle */
 }

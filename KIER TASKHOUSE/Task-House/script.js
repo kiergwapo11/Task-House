@@ -8,9 +8,7 @@ class TaskHouseApp {
             this.initializeAOS();
             this.setupNavigation();
             this.setupMobileMenu();
-            this.initializeModals();
-            this.initializeAttendance();
-            this.setupTaskFeatures();
+            this.initializeAttendanceModal();
         });
     }
 
@@ -77,402 +75,273 @@ class TaskHouseApp {
         });
     }
 
-    initializeModals() {
+    initializeAttendanceModal() {
         const clockIcon = document.querySelector('.header-icons .fa-clock').parentElement;
-        const attendanceModal = document.getElementById('attendanceModal');
-        const modalOverlay = document.querySelector('.modal-overlay');
+        const modal = document.getElementById('advancedAttendanceModal');
+        const overlay = document.getElementById('attendanceModalOverlay');
 
-        // Show modal
+        // Show modal when clock icon is clicked
         clockIcon.addEventListener('click', (e) => {
             e.preventDefault();
-            modalOverlay.style.display = 'block';
-            attendanceModal.style.display = 'block';
-            // Small delay to ensure display is set before adding show class
-            requestAnimationFrame(() => {
-                attendanceModal.classList.add('show');
-            });
+            modal.classList.add('active');
+            overlay.classList.add('active');
+            if (!this.attendanceSystem) {
+                this.attendanceSystem = new AdvancedAttendanceSystem();
+            }
         });
 
-        // Close modal when clicking overlay
-        modalOverlay.addEventListener('click', () => {
-            attendanceModal.classList.remove('show');
-            setTimeout(() => {
-                modalOverlay.style.display = 'none';
-                attendanceModal.style.display = 'none';
-            }, 300); // Match the transition duration
+        // Close modal when overlay is clicked
+        overlay.addEventListener('click', () => {
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
         });
 
-        // Close on escape key
+        // Close modal with escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && attendanceModal.style.display === 'block') {
-                attendanceModal.classList.remove('show');
-                setTimeout(() => {
-                    modalOverlay.style.display = 'none';
-                    attendanceModal.style.display = 'none';
-                }, 300);
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                overlay.classList.remove('active');
             }
         });
     }
+}
 
-    initializeAttendance() {
-        this.updateClock();
-        setInterval(() => this.updateClock(), 1000);
-    }
-
-    updateClock() {
-        const clockElement = document.querySelector('.digital-clock');
-        const dateElement = document.querySelector('.current-date');
-        
-        if (!clockElement || !dateElement) return;
-
-        const now = new Date();
-        
-        // Update time
-        const timeString = now.toLocaleTimeString('en-US', {
-            hour12: false,
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-        clockElement.textContent = timeString;
-
-        // Update date
-        const dateString = now.toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-        dateElement.textContent = dateString;
-    }
-
-    setupTaskFeatures() {
-        // Initialize task-related features
-        this.setupFilters();
-        this.setupSearch();
-        this.updateTaskCounters();
-    }
-
-    setupFilters() {
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                // Add your filter logic here
-            });
-        });
-    }
-
-    setupSearch() {
-        const searchInput = document.querySelector('.search-box input');
-        let searchTimer;
-
-        searchInput?.addEventListener('input', (e) => {
-            clearTimeout(searchTimer);
-            searchTimer = setTimeout(() => {
-                const searchTerm = e.target.value.toLowerCase();
-                // Add your search logic here
-            }, 300);
-        });
-    }
-
-    updateTaskCounters() {
-        const taskElements = {
-            total: document.querySelectorAll('.task-row'),
-            completed: document.querySelectorAll('.status-badge.completed'),
-            pending: document.querySelectorAll('.status-badge.pending')
+class AdvancedAttendanceSystem {
+    constructor() {
+        this.state = {
+            isWorking: false,
+            isOnBreak: false,
+            startTime: null,
+            breakStartTime: null,
+            totalWorkTime: 0,
+            totalBreakTime: 0,
+            dailyGoal: 8 * 60 * 60 * 1000,
+            lastActivity: new Date(),
+            weeklyStats: new Array(7).fill(0)
         };
 
-        const stats = {
-            total: taskElements.total.length,
-            completed: taskElements.completed.length,
-            pending: taskElements.pending.length
-        };
-
-        // Update counters in the UI
-        const elements = {
-            active: document.querySelector('.active-tasks'),
-            completed: document.querySelector('.completed-tasks'),
-            pending: document.querySelector('.pending-tasks'),
-            productivity: document.querySelector('.productivity')
-        };
-
-        if (elements.active) elements.active.textContent = stats.total - stats.completed;
-        if (elements.completed) elements.completed.textContent = stats.completed;
-        if (elements.pending) elements.pending.textContent = stats.pending;
-        
-        if (elements.productivity && stats.total > 0) {
-            const productivity = (stats.completed / stats.total) * 100;
-            elements.productivity.textContent = `${Math.round(productivity)}%`;
-        }
-    }
-}
-
-class AttendanceTracker {
-    constructor() {
-        this.workStartTime = null;
-        this.breakStartTime = null;
-        this.totalWorkTime = 0;
-        this.totalBreakTime = 0;
-        this.status = 'not-working'; // 'working', 'break'
+        this.charts = {};
+        this.initializeSystem();
     }
 
-    startWork() {
-        this.workStartTime = new Date();
-        this.status = 'working';
-        this.updateUI();
-        this.addTimelineEntry('Started working');
-    }
-
-    startBreak() {
-        this.breakStartTime = new Date();
-        this.status = 'break';
-        this.updateUI();
-        this.addTimelineEntry('Started break');
-    }
-
-    endBreak() {
-        const breakDuration = (new Date() - this.breakStartTime) / 1000 / 60; // in minutes
-        this.totalBreakTime += breakDuration;
-        this.breakStartTime = null;
-        this.status = 'working';
-        this.updateUI();
-        this.addTimelineEntry('Ended break');
-    }
-
-    updateUI() {
-        // Update status indicators and time displays
-        const statusDot = document.querySelector('.status-dot');
-        const statusText = document.querySelector('.status-text');
-        
-        switch(this.status) {
-            case 'working':
-                statusDot.className = 'status-dot active';
-                statusText.textContent = 'Working';
-                break;
-            case 'break':
-                statusDot.className = 'status-dot break';
-                statusText.textContent = 'On Break';
-                break;
-            default:
-                statusDot.className = 'status-dot';
-                statusText.textContent = 'Not Working';
-        }
-    }
-}
-
-class BreakReminder {
-    constructor(workDuration = 50) { // minutes
-        this.workDuration = workDuration * 60 * 1000; // convert to milliseconds
-        this.timer = null;
-    }
-
-    start() {
-        this.timer = setTimeout(() => {
-            this.showReminder();
-        }, this.workDuration);
-    }
-
-    showReminder() {
-        const notification = document.createElement('div');
-        notification.className = 'break-reminder';
-        notification.innerHTML = `
-            <i class="fas fa-coffee"></i>
-            <p>Time for a break! You've been working for ${this.workDuration/60000} minutes.</p>
-            <button class="remind-later">Remind me later</button>
-            <button class="take-break">Take Break</button>
-        `;
-        document.body.appendChild(notification);
-    }
-}
-
-class AttendanceNotifications {
-    static async requestPermission() {
-        if (!('Notification' in window)) {
-            console.log('This browser does not support notifications');
-            return;
-        }
-        
-        return await Notification.requestPermission();
-    }
-
-    static sendNotification(title, options = {}) {
-        if (Notification.permission === 'granted') {
-            new Notification(title, {
-                icon: '/path/to/icon.png',
-                badge: '/path/to/badge.png',
-                ...options
-            });
-        }
-    }
-}
-
-class OfflineAttendance {
-    constructor() {
-        this.db = null;
-        this.initDB();
-    }
-
-    async initDB() {
-        this.db = await openDB('attendance', 1, {
-            upgrade(db) {
-                db.createObjectStore('records', { keyPath: 'timestamp' });
-            }
-        });
-    }
-
-    async saveRecord(record) {
-        await this.db.add('records', {
-            ...record,
-            timestamp: new Date().toISOString()
-        });
-    }
-
-    async syncRecords() {
-        // Sync with server when online
-        if (navigator.onLine) {
-            const records = await this.db.getAll('records');
-            // Send to server
-            // Clear local records after successful sync
-        }
-    }
-}
-
-class AttendanceSystem {
-    constructor() {
+    initializeSystem() {
         this.initializeElements();
-        this.initializeEventListeners();
-        this.startClock();
+        this.setupEventListeners();
+        this.initializeCharts();
+        this.loadSavedState();
+        this.startPeriodicUpdates();
+        this.setupIdleDetection();
     }
 
     initializeElements() {
-        this.clockIcon = document.querySelector('.header-icons .fa-clock').parentElement;
-        this.modal = document.querySelector('.attendance-modal');
-        this.overlay = document.querySelector('.modal-overlay');
-        this.mainContent = document.querySelector('.main-container'); // Main content container
-        this.header = document.querySelector('.header'); // Header
-        this.sidebar = document.querySelector('.sidebar'); // Sidebar
+        this.elements = {
+            timeDisplay: document.querySelector('.current-time'),
+            dateDisplay: document.querySelector('.current-date'),
+            progressRing: document.querySelector('.progress-ring'),
+            timeWorked: document.querySelector('.time-worked'),
+            progressPercentage: document.querySelector('.progress-percentage'),
+            startWorkBtn: document.querySelector('.start-work'),
+            takeBreakBtn: document.querySelector('.take-break'),
+            statusIndicator: document.querySelector('.status-indicator'),
+            productivityChart: document.getElementById('productivityChart'),
+            weeklyChart: document.getElementById('weeklyChart')
+        };
     }
 
-    initializeEventListeners() {
-        // Toggle modal
-        this.clockIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.toggleModal(true);
-        });
-
-        // Close modal on overlay click
-        this.overlay.addEventListener('click', () => {
-            this.toggleModal(false);
-        });
-
-        // Close on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.toggleModal(false);
-            }
-        });
-
-        // Clock In/Out button
-        this.clockInBtn.addEventListener('click', () => this.toggleWork());
-
-        // Break button
-        this.breakBtn.addEventListener('click', () => this.toggleBreak());
-    }
-
-    toggleModal(show) {
-        this.modal.style.display = show ? 'block' : 'none';
-        this.overlay.style.display = show ? 'block' : 'none';
+    setupEventListeners() {
+        this.elements.startWorkBtn.addEventListener('click', () => this.toggleWork());
+        this.elements.takeBreakBtn.addEventListener('click', () => this.toggleBreak());
         
-        // Toggle blur on main content, header, and sidebar
-        [this.mainContent, this.header, this.sidebar].forEach(element => {
-            if (element) {
-                element.classList.toggle('blur-background', show);
+        // Track user activity
+        ['mousemove', 'keydown', 'click'].forEach(event => {
+            document.addEventListener(event, () => this.updateLastActivity());
+        });
+
+        // Handle visibility change
+        document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
+    }
+
+    initializeCharts() {
+        // Productivity Chart
+        this.charts.productivity = new Chart(this.elements.productivityChart, {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 12}, (_, i) => `${i * 2}:00`),
+                datasets: [{
+                    label: 'Productivity',
+                    data: Array(12).fill(0),
+                    borderColor: '#2563eb',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                }
             }
         });
 
-        if (show) {
-            requestAnimationFrame(() => {
-                this.modal.classList.add('show');
-            });
+        // Weekly Hours Chart
+        this.charts.weekly = new Chart(this.elements.weeklyChart, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Hours Worked',
+                    data: this.state.weeklyStats,
+                    backgroundColor: '#2563eb'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    }
+
+    toggleWork() {
+        if (!this.state.isWorking) {
+            this.startWork();
         } else {
-            this.modal.classList.remove('show');
+            this.endWork();
         }
     }
 
-    startClock() {
-        this.updateClock();
-        setInterval(() => this.updateClock(), 1000);
+    startWork() {
+        this.state.isWorking = true;
+        this.state.startTime = new Date();
+        this.updateUI('working');
+        this.startProgressAnimation();
+    }
+
+    endWork() {
+        this.state.isWorking = false;
+        this.calculateTotalTime();
+        this.updateUI('ended');
+        this.updateWeeklyStats();
+        this.saveState();
+    }
+
+    toggleBreak() {
+        if (!this.state.isOnBreak) {
+            this.startBreak();
+        } else {
+            this.endBreak();
+        }
+    }
+
+    startBreak() {
+        this.state.isOnBreak = true;
+        this.state.breakStartTime = new Date();
+        this.updateUI('break');
+    }
+
+    endBreak() {
+        this.state.isOnBreak = false;
+        this.calculateBreakTime();
+        this.updateUI('working');
+    }
+
+    calculateTotalTime() {
+        if (this.state.startTime) {
+            const endTime = new Date();
+            this.state.totalWorkTime += endTime - this.state.startTime;
+        }
+    }
+
+    updateProgressAnimation() {
+        const progress = (this.state.totalWorkTime / this.state.dailyGoal) * 100;
+        const circumference = 283; // 2 * π * 45 (circle radius)
+        const offset = circumference - (progress / 100) * circumference;
+        
+        this.elements.progressRing.style.strokeDashoffset = offset;
+        this.elements.progressPercentage.textContent = `${Math.min(100, Math.round(progress))}%`;
+    }
+
+    updateLastActivity() {
+        this.state.lastActivity = new Date();
+    }
+
+    saveState() {
+        localStorage.setItem('attendanceState', JSON.stringify(this.state));
+    }
+
+    loadSavedState() {
+        const saved = localStorage.getItem('attendanceState');
+        if (saved) {
+            this.state = { ...this.state, ...JSON.parse(saved) };
+            this.updateUI(this.state.isWorking ? 'working' : 'ended');
+        }
+    }
+
+    startPeriodicUpdates() {
+        setInterval(() => {
+            this.updateClock();
+            if (this.state.isWorking) {
+                this.calculateTotalTime();
+                this.updateProgressAnimation();
+                this.checkIdleStatus();
+            }
+        }, 1000);
     }
 
     updateClock() {
         const now = new Date();
-        
-        // Update digital clock
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        this.clockDisplay.textContent = `${hours}:${minutes}:${seconds}`;
-
-        // Update date
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        this.dateDisplay.textContent = now.toLocaleDateString('en-US', options);
-    }
-
-    toggleWork() {
-        const isWorking = this.clockInBtn.classList.contains('active');
-        if (isWorking) {
-            this.clockInBtn.textContent = 'Clock In';
-            this.clockInBtn.classList.remove('active');
-            this.breakBtn.disabled = true;
-            this.addTimelineEntry('Clocked Out');
-        } else {
-            this.clockInBtn.textContent = 'Clock Out';
-            this.clockInBtn.classList.add('active');
-            this.breakBtn.disabled = false;
-            this.addTimelineEntry('Clocked In');
-        }
-    }
-
-    toggleBreak() {
-        const isOnBreak = this.breakBtn.classList.contains('active');
-        if (isOnBreak) {
-            this.breakBtn.textContent = 'Take Break';
-            this.breakBtn.classList.remove('active');
-            this.addTimelineEntry('Returned from Break');
-        } else {
-            this.breakBtn.textContent = 'End Break';
-            this.breakBtn.classList.add('active');
-            this.addTimelineEntry('Started Break');
-        }
-    }
-
-    addTimelineEntry(action) {
-        const timeline = document.querySelector('.timeline-container');
-        const now = new Date();
-        const time = now.toLocaleTimeString('en-US', { 
-            hour: '2-digit', 
-            minute: '2-digit' 
+        this.elements.timeDisplay.textContent = now.toLocaleTimeString();
+        this.elements.dateDisplay.textContent = now.toLocaleDateString('en-US', {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric'
         });
+    }
+
+    checkIdleStatus() {
+        const idleThreshold = 5 * 60 * 1000; // 5 minutes
+        const timeSinceLastActivity = new Date() - this.state.lastActivity;
         
-        const entry = document.createElement('div');
-        entry.className = 'timeline-item';
-        entry.innerHTML = `
-            <div class="timeline-time">${time}</div>
-            <div class="timeline-action">${action}</div>
+        if (timeSinceLastActivity > idleThreshold) {
+            this.state.productivityScore = Math.max(0, this.state.productivityScore - 5);
+            this.suggestBreak();
+        }
+    }
+
+    suggestBreak() {
+        // Show break suggestion notification
+        const notification = document.createElement('div');
+        notification.className = 'break-suggestion';
+        notification.innerHTML = `
+            <i class="fas fa-coffee"></i>
+            <p>Time for a break? You've been inactive for a while.</p>
         `;
-        
-        timeline.insertBefore(entry, timeline.firstChild);
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 5000);
+    }
+
+    updateUI(state) {
+        // Implement UI update logic based on the current state
+    }
+
+    calculateBreakTime() {
+        // Implement break time calculation logic
+    }
+
+    getActiveTime() {
+        // Implement active time calculation logic
+        return 0; // Placeholder return, actual implementation needed
+    }
+
+    updateProductivityChart() {
+        // Implement productivity chart update logic
+    }
+
+    updateWeeklyStats() {
+        // Implement weekly stats update logic
     }
 }
 
-// Initialize the application
+// Initialize only once
 const app = new TaskHouseApp();
-
-// Initialize the attendance system
-document.addEventListener('DOMContentLoaded', () => {
-    const attendance = new AttendanceSystem();
-});
 
 
