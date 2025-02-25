@@ -3416,18 +3416,28 @@ body {
     max-width: 1200px;
     height: 90vh;
     background: white;
-    border-radius: 16px;
-    z-index: 999;
-    display: none;
-    flex-direction: column;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    z-index: 1000;
+    display: none; /* Initially hidden */
     opacity: 0;
     transition: all 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .attendance-modal.active {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 /* Header Styles */
@@ -4107,18 +4117,28 @@ body {
     max-width: 1200px;
     height: 90vh;
     background: white;
-    border-radius: 16px;
-    z-index: 999;
-    display: none;
-    flex-direction: column;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    z-index: 1000;
+    display: none; /* Initially hidden */
     opacity: 0;
     transition: all 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .attendance-modal.active {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 /* Stats Cards */
@@ -4314,18 +4334,28 @@ body {
     max-width: 1200px;
     height: 90vh;
     background: white;
-    border-radius: 16px;
-    z-index: 999;
-    display: none;
-    flex-direction: column;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    z-index: 1000;
+    display: none; /* Initially hidden */
     opacity: 0;
     transition: all 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-.attendance-modal.modal-active {
+.attendance-modal.active {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 /* Enhanced Stats Cards */
@@ -5507,642 +5537,6 @@ body {
     color: #1e293b;
     margin-bottom: 16px;
     font-size: 1.1rem;
-}
-
-.timeline-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 16px;
-    border-bottom: 1px solid #f1f5f9;
-}
-
-.timeline-item:last-child {
-    border-bottom: none;
-}
-
-/* Modal Overlay with Blur */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 998;
-    display: none;
-}
-
-/* Add blur to main content when modal is open */
-.blur-background {
-    filter: blur(8px);
-    pointer-events: none;
-    user-select: none;
-    transition: filter 0.3s ease;
-}
-
-/* Make sure modal stays sharp */
-.attendance-modal {
-    filter: none !important;
-    pointer-events: auto !important;
-}
-
-/* Add these new styles to your existing CSS */
-
-:root {
-    /* Add these to your existing root variables */
-    --primary-color: #10b981;
-    --success: #10b981;
-    --warning: #f59e0b;
-    --danger: #ef4444;
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --transition-smooth: all 0.3s ease;
-    --hover-bg: rgba(0, 0, 0, 0.05);
-    --border: #e2e8f0;
-    --gradient-end: #0d9488;
-    --primary-light: rgba(16, 185, 129, 0.1);
-}
-
-/* Modern Attendance Modal */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(249, 250, 251, 0.95));
-    backdrop-filter: blur(10px);
-    border-radius: 24px;
-    z-index: 999;
-    display: none;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.attendance-dashboard {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 24px;
-    padding: 24px;
-    height: 80vh;
-    max-height: 700px;
-}
-
-/* Left Panel Styles */
-.attendance-sidebar {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 24px;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.time-display {
-    text-align: center;
-    padding: 24px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.digital-clock {
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    font-family: 'SF Mono', monospace;
-    margin-bottom: 8px;
-}
-
-/* Progress Ring */
-.progress-ring {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    margin: 20px auto;
-}
-
-.progress-ring svg {
-    transform: rotate(-90deg);
-}
-
-.progress-ring circle {
-    fill: none;
-    stroke-width: 8;
-    stroke-linecap: round;
-}
-
-.progress-ring .background {
-    stroke: #e2e8f0;
-}
-
-.progress-ring .progress-circle {
-    stroke: var(--primary-color);
-    transition: stroke-dashoffset 0.3s ease;
-}
-
-.progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-color);
-}
-
-/* Status Card */
-.status-card {
-    background: white;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.status-indicator {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.status-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #9ca3af;
-    position: relative;
-}
-
-.status-dot::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid currentColor;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0.3;
-}
-
-.status-dot.active { background: var(--success); }
-.status-dot.break { background: var(--warning); }
-
-/* Action Buttons */
-.attendance-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.action-button {
-    padding: 16px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    font-size: 1rem;
-}
-
-.clock-in-btn {
-    background: var(--success);
-    color: white;
-}
-
-.clock-in-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-}
-
-.break-btn {
-    background: #f8fafc;
-    color: #64748b;
-}
-
-.break-btn:not(:disabled):hover {
-    background: #f1f5f9;
-    transform: translateY(-2px);
-}
-
-.break-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* Timeline */
-.timeline {
-    background: white;
-    border-radius: 16px;
-    padding: 24px;
-    margin-top: 24px;
-}
-
-.timeline-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 16px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    margin-bottom: 12px;
-}
-
-.timeline-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--primary-color);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.timeline-icon.start { background: var(--success); }
-.timeline-icon.break { background: var(--warning); }
-.timeline-icon.end { background: var(--danger); }
-
-/* Stats Grid */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.stat-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.stat-progress {
-    height: 6px;
-    background: #e2e8f0;
-    border-radius: 3px;
-    margin: 12px 0;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(to right, #10b981, #34d399);
-    border-radius: 3px;
-    transition: width 0.3s ease;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .attendance-dashboard {
-        grid-template-columns: 1fr;
-        height: auto;
-        max-height: none;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stat-card {
-        height: auto;
-    }
-}
-
-/* Modal Overlay */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
-    z-index: 998;
-    display: none;
-}
-
-/* Blur effect for background */
-.blur-background {
-    filter: blur(8px);
-    pointer-events: none;
-    user-select: none;
-    transition: filter 0.3s ease;
-}
-
-/* Modern Attendance Modal */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(8px);
-    z-index: 999;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.modal-overlay.show {
-    opacity: 1;
-}
-
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    z-index: 1000;
-    opacity: 0;
-    transition: all 0.3s ease;
-    overflow: hidden;
-}
-
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.attendance-dashboard {
-    display: flex;
-    height: 700px;
-}
-
-/* Left Panel Styles */
-.attendance-sidebar {
-    width: 380px;
-    padding: 32px;
-    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-    border-right: 1px solid #e2e8f0;
-}
-
-.time-display {
-    text-align: center;
-    margin-bottom: 32px;
-    padding: 24px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-.digital-clock {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #0f172a;
-    font-family: 'SF Mono', monospace;
-    letter-spacing: -1px;
-    margin-bottom: 8px;
-}
-
-.date-info {
-    color: #64748b;
-}
-
-.current-date {
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-}
-
-.timezone {
-    font-size: 0.9rem;
-    color: #94a3b8;
-}
-
-.status-card {
-    background: white;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    margin-bottom: 24px;
-}
-
-.status-indicator {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.status-dot {
-    width: 12px;
-    height: 12px;
-    background: #cbd5e1;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.status-dot.active {
-    background: #10b981;
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
-}
-
-.status-dot.break {
-    background: #f59e0b;
-    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
-}
-
-.status-text {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #0f172a;
-}
-
-.work-duration {
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.work-duration label {
-    display: block;
-    color: #64748b;
-    margin-bottom: 8px;
-}
-
-.work-duration h3 {
-    font-size: 2rem;
-    color: #0f172a;
-    font-weight: 600;
-}
-
-/* Progress Ring */
-.progress-ring {
-    position: relative;
-    width: 160px;
-    height: 160px;
-    margin: 0 auto;
-}
-
-.progress-ring svg {
-    transform: rotate(-90deg);
-}
-
-.progress-ring circle {
-    fill: none;
-    stroke-linecap: round;
-}
-
-.progress-ring .background {
-    stroke: #f1f5f9;
-    stroke-width: 12;
-}
-
-.progress-ring .progress-circle {
-    stroke: #10b981;
-    stroke-width: 12;
-    transition: stroke-dashoffset 0.3s ease;
-}
-
-.progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    font-weight: 600;
-    color: #0f172a;
-}
-
-/* Action Buttons */
-.attendance-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.action-button {
-    width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-}
-
-.clock-in-btn {
-    background: #10b981;
-    color: white;
-}
-
-.clock-in-btn:hover {
-    background: #059669;
-    transform: translateY(-1px);
-}
-
-.break-btn {
-    background: #f59e0b;
-    color: white;
-}
-
-.break-btn:hover {
-    background: #d97706;
-    transform: translateY(-1px);
-}
-
-.action-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Right Panel */
-.attendance-main {
-    flex: 1;
-    padding: 32px;
-    background: white;
-    overflow-y: auto;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 32px;
-}
-
-.stat-card {
-    background: #f8fafc;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-.stat-card h4 {
-    color: #64748b;
-    margin-bottom: 16px;
-    font-size: 1rem;
-}
-
-.stat-card h2 {
-    color: #0f172a;
-    font-size: 2rem;
-    margin-bottom: 16px;
-}
-
-.stat-progress {
-    height: 8px;
-    background: #e2e8f0;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 8px;
-}
-
-.progress-bar {
-    height: 100%;
-    background: #10b981;
-    border-radius: 4px;
-    transition: width 0.3s ease;
-}
-
-.stat-target {
-    color: #94a3b8;
-    font-size: 0.9rem;
-}
-
-/* Timeline */
-.timeline {
-    background: #f8fafc;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-.timeline h3 {
-    color: #0f172a;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
 }
 
 .timeline-container {
@@ -7490,247 +6884,195 @@ body {
     background: var(--surface);
     border-radius: 16px;
     padding: 24px;
-    box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-        0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
-.stat-header {
+/* Responsive styles for tablets and smaller desktops */
+@media screen and (max-width: 992px) {
+    .main-container {
+        margin: 80px 15px 0 15px;
+        width: calc(100% - 30px);
+        padding: 15px;
+    }
+
+    .task-container {
+        width: calc(100% - 30px);
+        margin: 20px 15px;
+        padding: 15px;
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media screen and (max-width: 768px) {
+    .main-container {
+        margin: 80px 20px 0 20px;
+        width: calc(100% - 40px);
+    }
+
+    .task-container {
+        width: calc(100% - 40px);
+        margin: 10px 20px;
+    }
+}
+
+/* Attendance Section Styles */
+.attendance-section {
+    padding: 2rem;
+    background: var(--surface, #ffffff);
+    border-radius: 1rem;
+}
+
+.attendance-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 2rem;
 }
 
-.stat-header i {
-    font-size: 1.25rem;
-    color: var(--primary);
-}
-
-.stat-value {
-    font-size: 2rem;
+.current-time {
+    font-family: 'SF Mono', monospace;
+    font-size: 2.5rem;
     font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 16px;
+    color: #2563eb;
+    margin-bottom: 0.5rem;
 }
 
-/* Control Buttons */
-.work-controls {
-    display: flex;
-    gap: 16px;
+.current-date {
+    color: #64748b;
+    font-size: 1rem;
 }
 
-.control-btn {
+/* Attendance Stats */
+.attendance-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Time Action Buttons */
+.attendance-actions {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 24px;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.time-action-btn {
+    flex: 1;
+    padding: 1rem;
     border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: var(--transition);
-}
-
-.start-work {
-    background: var(--primary);
-    color: white;
-}
-
-.take-break {
-    background: var(--warning);
-    color: white;
-}
-
-.control-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Quick Actions */
-.attendance-footer {
-    margin-top: 32px;
-    padding-top: 24px;
-    border-top: 1px solid var(--surface-dark);
-}
-
-.quick-actions {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-}
-
-.action-btn {
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    border: 1px solid var(--surface-dark);
-    border-radius: 10px;
-    background: var(--surface);
-    color: var(--text-secondary);
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-.action-btn:hover {
-    background: var(--surface-dark);
-    color: var(--text-primary);
+.time-action-btn:not(.break-btn) {
+    background: #2563eb;
+    color: white;
+}
+
+.time-action-btn:not(.break-btn):hover {
+    background: #1d4ed8;
+}
+
+.break-btn {
+    background: #f59e0b;
+    color: white;
+}
+
+.break-btn:hover {
+    background: #d97706;
+}
+
+/* Attendance History */
+.attendance-history {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.history-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.history-filters select {
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background: white;
+}
+
+.history-table {
+    overflow-x: auto;
+}
+
+.history-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.history-table th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #64748b;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-badge.present {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.late {
+    background: #fef3c7;
+    color: #92400e;
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-    .main-tracker {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .circular-progress {
-        margin: 0 auto;
-    }
-}
-
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .attendance-header {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
     }
 
-    .current-time {
-        font-size: 2.5rem;
+    .attendance-actions {
+        flex-direction: column;
     }
 
-    .stats-grid {
-        grid-template-columns: 1fr;
+    .time-action-btn {
+        width: 100%;
     }
-}
-
-/* Add these styles to your existing CSS */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 999;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.attendance-system-modal {
-    /* Previous styles remain the same */
-    opacity: 0;
-    visibility: hidden;
-    transform: translate(-50%, -60%);
-    transition: all 0.3s ease;
-}
-
-.attendance-system-modal.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%);
-}
-
-/* Update the modal overlay with stronger blur and darker background */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6); /* Darker overlay */
-    backdrop-filter: blur(12px); /* Stronger blur */
-    -webkit-backdrop-filter: blur(12px);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Update attendance modal with new color scheme */
-.attendance-system-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    width: 90%;
-    max-width: 1000px;
-    background: #1a1a2e; /* Dark blue background */
-    color: #ffffff; /* White text */
-    border-radius: 24px;
-    padding: 32px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.attendance-system-modal.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%);
-}
-
-/* Update time display for better visibility */
-.attendance-system-modal .current-time {
-    color: #4fd1c5; /* Cyan accent color */
-    font-size: 3.5rem;
-    font-weight: 600;
-}
-
-.attendance-system-modal .date-display {
-    color: #a0aec0; /* Light gray for secondary text */
-}
-
-/* Update stat cards within the modal */
-.attendance-system-modal .stat-card {
-    background: #252547; /* Slightly lighter dark blue */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-}
-
-/* Update buttons within the modal */
-.attendance-system-modal .control-btn {
-    background: #4fd1c5; /* Cyan buttons */
-    color: #1a1a2e;
-    font-weight: 600;
-    border: none;
-    transition: all 0.3s ease;
-}
-
-.attendance-system-modal .control-btn:hover {
-    background: #38b2ac; /* Darker cyan on hover */
-    transform: translateY(-2px);
-}
-
-/* Update progress circle */
-.attendance-system-modal .progress-ring {
-    stroke: #4fd1c5; /* Cyan progress indicator */
-}
-
-.attendance-system-modal .progress-bg {
-    stroke: rgba(255, 255, 255, 0.1); /* Subtle background circle */
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -17,6 +18,7 @@
         </button>
         <div class="logo">
             <img src="img/sh.png" alt="Task House Logo" class="logo-img transparent-bg">
+            
             
         </div>
         <div class="header-icons">
@@ -43,6 +45,7 @@
         </div>
         <nav class="nav">
             <a href="#welcome" class="active"><i class="fas fa-home"></i> Welcome</a>
+            <a href="#attendance"><i class="fas fa-clock"></i> Attendance</a>
             <a href="#tasks"><i class="fas fa-tasks"></i> My Tasks</a>
             <a href="#"><i class="fas fa-cogs"></i> Operation</a>
             <a href="#"><i class="fas fa-users"></i> Human Resources</a>
@@ -50,11 +53,11 @@
     </div>
 
     <div class="main-container">
-        <div class="banner-wrapper">
-            <img src="img/banner.png" alt="Welcome Banner" class="banner-image">
-        </div>
-        
+        <!-- Welcome section -->
         <div class="welcome-content">
+            <div class="banner-wrapper">
+                <img src="img/banner.png" alt="Welcome Banner" class="banner-image">
+            </div>
             <h1 class="welcome-message">Welcome to Virtual BizNest!</h1>
             <p class="sub-message">Join us in making a difference through successful referrals.</p>
             
@@ -78,160 +81,147 @@
             </div>
         </div>
 
-        <div id="advancedAttendanceModal" class="attendance-system-modal">
+        <!-- Attendance section -->
+        <div class="attendance-section" style="display: none;">
             <div class="attendance-header">
-                <div class="time-section">
-                    <div class="current-time" data-type="digital">00:00:00</div>
-                    <div class="date-display">
-                        <span class="current-date">Monday, February 24</span>
-                        <span class="timezone">GMT+8</span>
-                    </div>
-                </div>
-                
-                <div class="user-status">
-                    <div class="avatar-wrapper">
-                        <img src="img/toji.png" alt="User avatar" class="user-avatar">
-                        <span class="status-indicator"></span>
-                    </div>
-                    <div class="user-info">
-                        <h3 class="user-name">Christian Kier Ortalla</h3>
-                        <span class="user-role">Frontend Developer</span>
-                    </div>
+                <h1><i class="fas fa-clock"></i> Attendance Management</h1>
+                <div class="time-display">
+                    <div class="current-time" id="currentTime">00:00:00</div>
+                    <div class="current-date" id="currentDate">Monday, January 1, 2024</div>
                 </div>
             </div>
 
-            <div class="attendance-grid">
-                <div class="main-tracker">
-                    <div class="circular-progress">
-                        <svg viewBox="0 0 100 100">
-                            <circle class="progress-bg" cx="50" cy="50" r="45"/>
-                            <circle class="progress-ring" cx="50" cy="50" r="45"/>
-                            <path class="progress-wave" d=""/>
-                        </svg>
-                        <div class="progress-content">
-                            <div class="time-worked">0h 0m</div>
-                            <div class="progress-percentage">0%</div>
-                        </div>
+            <div class="attendance-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    
-                    <div class="work-controls">
-                        <button class="control-btn start-work">
-                            <span class="btn-icon">▶</span>
-                            <span class="btn-text">Start Work Day</span>
-                        </button>
-                        <button class="control-btn take-break" disabled>
-                            <span class="btn-icon">⏸</span>
-                            <span class="btn-text">Take Break</span>
-                        </button>
+                    <div class="stat-info">
+                        <h3>Today's Hours</h3>
+                        <span class="stat-number" id="todayHours">8:00</span>
                     </div>
                 </div>
 
-                <div class="stats-grid">
-                    <div class="stat-card productivity">
-                        <div class="stat-header">
-                            <i class="fas fa-chart-line"></i>
-                            <h4>Productivity</h4>
-                        </div>
-                        <div class="stat-value">98%</div>
-                        <div class="stat-chart">
-                            <canvas id="productivityChart"></canvas>
-                        </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-week"></i>
                     </div>
-
-                    <div class="stat-card weekly-hours">
-                        <div class="stat-header">
-                            <i class="fas fa-clock"></i>
-                            <h4>Weekly Hours</h4>
-                        </div>
-                        <div class="stat-value">38.5h</div>
-                        <div class="stat-chart">
-                            <canvas id="weeklyChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="stat-card breaks">
-                        <div class="stat-header">
-                            <i class="fas fa-coffee"></i>
-                            <h4>Break Time</h4>
-                        </div>
-                        <div class="stat-value">45m</div>
-                        <div class="break-timeline"></div>
+                    <div class="stat-info">
+                        <h3>Week Total</h3>
+                        <span class="stat-number" id="weekTotal">40:00</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="attendance-footer">
-                <div class="quick-actions">
-                    <button class="action-btn" data-action="report">
-                        <i class="fas fa-file-alt"></i>
-                        <span>Report</span>
-                    </button>
-                    <button class="action-btn" data-action="schedule">
+                <div class="stat-card">
+                    <div class="stat-icon">
                         <i class="fas fa-calendar-alt"></i>
-                        <span>Schedule</span>
-                    </button>
-                    <button class="action-btn" data-action="history">
-                        <i class="fas fa-history"></i>
-                        <span>History</span>
-                    </button>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Month Total</h3>
+                        <span class="stat-number" id="monthTotal">160:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="attendance-actions">
+                <button class="time-action-btn" id="timeInBtn">
+                    <i class="fas fa-sign-in-alt"></i> Time In
+                </button>
+                <button class="time-action-btn break-btn" id="breakBtn">
+                    <i class="fas fa-coffee"></i> Break
+                </button>
+                <button class="time-action-btn" id="timeOutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Time Out
+                </button>
+            </div>
+
+            <div class="attendance-history">
+                <h2>Attendance History</h2>
+                <div class="history-filters">
+                    <select id="monthFilter">
+                        <option value="">Select Month</option>
+                        <!-- Will be populated by JS -->
+                    </select>
+                    <select id="yearFilter">
+                        <option value="">Select Year</option>
+                        <!-- Will be populated by JS -->
+                    </select>
+                </div>
+                <div class="history-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time In</th>
+                                <th>Break</th>
+                                <th>Time Out</th>
+                                <th>Total Hours</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceTableBody">
+                            <!-- Will be populated by JS -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="task-workspace" style="display: none;">
-        <div class="task-header">
-            <h1>Task Dashboard</h1>
-            <div class="header-actions">
-                <div class="search-box">
-                    <input type="text" placeholder="Search tasks..." 
-                           aria-label="Search tasks" 
-                           class="search-input">
-                    <button type="button" class="quick-search" aria-label="Quick search">
-                        Quick search
-                    </button>
-                </div>
-                <button class="create-task">Create Task</button>
-            </div>
-        </div>
-
-        <div class="task-filters">
-            <div class="filter-buttons">
-                <button class="filter-btn active">All Tasks</button>
-                <button class="filter-btn">Pending</button>
-                <button class="filter-btn">In Progress</button>
-                <button class="filter-btn">Completed</button>
-            </div>
-        </div>
-
-        <div class="task-stats">
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-list"></i>
-                </div>
-                <div class="stat-info">
-                    <h3>Total Tasks</h3>
-                    <span class="stat-number">0</span>
+        <!-- Tasks section -->
+        <div class="task-workspace" style="display: none;">
+            <div class="task-header">
+                <h1>Task Dashboard</h1>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search tasks..." 
+                               aria-label="Search tasks" 
+                               class="search-input">
+                        <button type="button" class="quick-search" aria-label="Quick search">
+                            Quick search
+                        </button>
+                    </div>
+                    <button class="create-task">Create Task</button>
                 </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-spinner"></i>
-                </div>
-                <div class="stat-info">
-                    <h3>In Progress</h3>
-                    <span class="stat-number">5</span>
+            <div class="task-filters">
+                <div class="filter-buttons">
+                    <button class="filter-btn active">All Tasks</button>
+                    <button class="filter-btn">Pending</button>
+                    <button class="filter-btn">In Progress</button>
+                    <button class="filter-btn">Completed</button>
                 </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-check-circle"></i>
+            <div class="task-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Tasks</h3>
+                        <span class="stat-number">0</span>
+                    </div>
                 </div>
-                <div class="stat-info">
-                    <h3>Completed</h3>
-                    <span class="stat-number">7</span>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>In Progress</h3>
+                        <span class="stat-number">5</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Completed</h3>
+                        <span class="stat-number">7</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -291,7 +281,7 @@
     </div>
 
     <!-- Modal Overlay -->
-    <div class="modal-overlay" id="attendanceModalOverlay"></div>
+  
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
