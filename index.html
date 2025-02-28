@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Task-House</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="logo">
+            <img src="img/sh.png" alt="Task House Logo" class="logo-img transparent-bg">
+            
+            
+        </div>
+        <div class="header-icons">
+            <a href="mailto:careers@virtualbiznest.com" class="icon"><i class="fas fa-envelope"></i></a>
+            <a href="#" class="icon"><i class="fas fa-clock"></i></a>
+            <a href="#" class="icon"><i class="fas fa-camera"></i></a>          
+            <button type="button" class="settings-btn" aria-label="Settings">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="settings-dropdown">
+                <a href="mailto:careers@virtualbiznest.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+        
+    </header>
+
+    <div class="sidebar">
+        <div class="profile">
+            <img src="img/toji.png" alt="Profile picture of Christian Kier Ortalla" class="profile-pic">
+            <h3>Christian Kier Ortalla</h3>
+            <a href="#" class="edit-profile">Edit Profile</a>
+        </div>
+        <nav class="nav">
+            <div class="nav-item">
+                <a href="#welcome" class="nav-link active"><i class="fas fa-home"></i> Welcome</a>
+            </div>
+            
+            <div class="nav-item">
+                <a href="#attendance" class="nav-link"><i class="fas fa-clock"></i> Attendance</a>
+            </div>
+            
+            <div class="nav-item">
+                <a href="#tasks" class="nav-link"><i class="fas fa-tasks"></i> My Tasks</a>
+            </div>
+            
+            <div class="nav-item has-submenu">
+                <a href="#" class="nav-link">
+                    <span><i class="fas fa-cogs"></i> Operation</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="submenu">
+                    <a href="#" class="submenu-link">
+                        <span class="status-dot"></span>
+                        Task Reports
+                    </a>
+                    <a href="#" class="submenu-link">
+                        <span class="status-dot"></span>
+                        VA Utilization
+                    </a>
+                </div>
+            </div>
+            
+            <div class="nav-item has-submenu">
+                <a href="#" class="nav-link">
+                    <span><i class="fas fa-users"></i> Human Resources</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="submenu">
+                    <a href="#" class="submenu-link">
+                        <span class="status-dot"></span>
+                        Memos
+                    </a>
+                    <a href="#" class="submenu-link">
+                        <span class="status-dot"></span>
+                        Payroll
+                    </a>
+                    <a href="#" class="submenu-link">
+                        <span class="status-dot"></span>
+                        My Performance
+                    </a>
+                    <a href="#" class="submenu-link">
+                        <span class="status-dot"></span>
+                        Employee Handbook
+                    </a>
+                    <a href="#" class="submenu-link">
+                        <span class="status-dot"></span>
+                        Code Of Conduct
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="main-container">
+        <!-- Welcome section -->
+        <div class="welcome-content">
+            <div class="banner-wrapper">
+                <img src="img/banner.png" alt="Welcome Banner" class="banner-image">
+            </div>
+            <h1 class="welcome-message">Welcome to Virtual BizNest!</h1>
+            <p class="sub-message">Join us in making a difference through successful referrals.</p>
+            
+            <div class="highlight-box">
+                <p class="highlight-text">Discover exciting opportunities and be part of our growing team</p>
+            </div>
+
+            <div class="feature-cards">
+                <div class="feature-card hover-animation" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Sales & Design Assistant</h3>
+                    <p>Join our creative team and help shape the future of design</p>
+                </div>
+                <div class="feature-card hover-animation" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Sales Apprentice</h3>
+                    <p>Learn and grow with our experienced sales team</p>
+                </div>
+                <div class="feature-card hover-animation" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Healthcare CSR</h3>
+                    <p>Make a difference in healthcare customer service</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance section -->
+        <div class="attendance-modern">
+            <div class="attendance-header">
+                <div class="header-left">
+                    <h2>ATTENDANCE TRACKER</h2>
+                    <div class="date-range">
+                        <i class="fas fa-calendar-alt"></i>
+                        <select class="date-range-select">
+                            <option>April 1, 2025 – March 31, 2025</option>
+                            <option>Previous Month</option>
+                            <option>Custom Range</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-export">
+                        <i class="fas fa-download"></i> Export Data
+                    </button>
+                    <button class="btn-filter">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                </div>
+            </div>
+
+            <div class="attendance-grid">
+                <!-- Time and Status Card -->
+                <div class="attendance-card time-status">
+                    <div class="digital-time" id="currentTime">00:00:00</div>
+                    <div class="date-display" id="currentDate">Monday, April 1, 2024</div>
+                    <div class="status-ring">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                            <circle class="ring-progress" cx="50" cy="50" r="45"/>
+                        </svg>
+                        <div class="hours-display">
+                            <span id="todayHours">0:00</span>
+                            <span class="label">Hours Today</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button id="timeInBtn" class="btn-action time-in">
+                            <i class="fas fa-play"></i> Time In
+                        </button>
+                        <button id="breakBtn" class="btn-action break" disabled>
+                            <i class="fas fa-coffee"></i> Break
+                        </button>
+                        <button id="timeOutBtn" class="btn-action time-out" disabled>
+                            <i class="fas fa-stop"></i> Time Out
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Attendance Table -->
+                <div class="attendance-table-container">
+                    <div class="table-header">
+                        <div class="legend">
+                            <span class="legend-item"><i class="fas fa-circle pending"></i> Pending</span>
+                            <span class="legend-item"><i class="fas fa-circle approved"></i> Approved</span>
+                            <span class="legend-item"><i class="fas fa-circle declined"></i> Declined</span>
+                            <span class="legend-item"><i class="fas fa-circle leave"></i> Leave</span>
+                            <span class="legend-item"><i class="fas fa-circle overtime"></i> Overtime</span>
+                        </div>
+                    </div>
+                    <table class="attendance-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Schedule</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                                <th>Break</th>
+                                <th>Tardiness</th>
+                                <th>Undertime</th>
+                                <th>Break</th>
+                                <th>Worked Hours</th>
+                                <th>Excess Hours</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceTableBody">
+                            <!-- Dynamic content will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks section -->
+        <div class="task-workspace">
+            <div class="task-header">
+                <h1>Task Dashboard</h1>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search tasks..." 
+                               aria-label="Search tasks" 
+                               class="search-input">
+                        <button type="button" class="quick-search" aria-label="Quick search">
+                            Quick search
+                        </button>
+                    </div>
+                    <button class="create-task">Create Task</button>
+                </div>
+            </div>
+
+            <div class="task-filters">
+                <div class="filter-buttons">
+                    <button class="filter-btn active">All Tasks</button>
+                    <button class="filter-btn">Pending</button>
+                    <button class="filter-btn">In Progress</button>
+                    <button class="filter-btn">Completed</button>
+                </div>
+            </div>
+
+            <div class="task-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Tasks</h3>
+                        <span class="stat-number">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>In Progress</h3>
+                        <span class="stat-number">5</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Completed</h3>
+                        <span class="stat-number">7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Creation Modal -->
+    <div class="modal" id="createTaskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Task</h2>
+                <button class="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="task-form">
+                <div class="form-group">
+                    <label>Task Title</label>
+                    <input type="text" name="title" required minlength="3" maxlength="100">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select name="priority" required>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Due Date</label>
+                        <input type="date" name="dueDate" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tags</label>
+                    <div class="tags-input">
+                        <input type="text" placeholder="Add tags...">
+                        <div class="tags-container"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Assignee</label>
+                    <select name="assignee" required>
+                        <!-- Add team members here -->
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+  
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
