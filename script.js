@@ -22,61 +22,78 @@ class TaskHouseApp {
     }
 
     setupNavigation() {
+        // Get all sections
         const sections = {
             welcome: document.querySelector('.welcome-content'),
-            tasks: document.querySelector('.task-workspace'),
-            attendance: document.querySelector('.attendance-modern')
+            attendance: document.querySelector('.attendance-modern'),
+            tasks: document.querySelector('.task-page'),
+            taskReports: document.querySelector('.task-reports-section'),
+            vaUtilization: document.querySelector('.va-utilization-section')
         };
-        
-        const navLinks = document.querySelectorAll('.nav a');
 
-        // Get last active section from localStorage or default to 'welcome'
-        const lastActiveSection = localStorage.getItem('activeSection') || 'welcome';
-
-        // Hide all sections first
+        // Hide all sections except welcome initially
         Object.values(sections).forEach(section => {
-            if (section) section.style.display = 'none';
-        });
-
-        // Show the last active section
-        if (sections[lastActiveSection]) {
-            sections[lastActiveSection].style.display = 'block';
-        }
-
-        // Update active nav link
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href').replace('#', '');
-            if (href === lastActiveSection) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
+            if (section && section !== sections.welcome) {
+                section.style.display = 'none';
             }
         });
 
-        navLinks.forEach(link => {
+        // Handle main navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const href = link.getAttribute('href').replace('#', '');
-                
+                const linkText = e.target.textContent.trim();
+
                 // Remove active class from all links
-                navLinks.forEach(l => l.classList.remove('active'));
-                // Add active class to clicked link
-                link.classList.add('active');
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                
+                // Hide all sections first
+                Object.values(sections).forEach(section => {
+                    if (section) section.style.display = 'none';
+                });
+
+                // Show appropriate section and set active class
+                switch(linkText) {
+                    case 'Welcome':
+                        sections.welcome.style.display = 'block';
+                        link.classList.add('active');
+                        break;
+                    case 'Attendance':
+                        sections.attendance.style.display = 'block';
+                        link.classList.add('active');
+                        break;
+                    case 'My Tasks':
+                        sections.tasks.style.display = 'block';
+                        link.classList.add('active');
+                        break;
+                }
+            });
+        });
+
+        // Handle submenu links
+        document.querySelectorAll('.submenu-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const linkText = e.target.closest('.submenu-link').textContent.trim();
 
                 // Hide all sections first
                 Object.values(sections).forEach(section => {
                     if (section) section.style.display = 'none';
                 });
 
-                // Show selected section
-                switch(href) {
-                    case 'welcome':
-                    case 'tasks':
-                    case 'attendance':
-                        sections[href].style.display = 'block';
-                        // Store active section in localStorage
-                        localStorage.setItem('activeSection', href);
-                        break;
+                // Show appropriate section
+                if (linkText === 'Task Reports') {
+                    const taskReportsSection = document.querySelector('.task-reports-section');
+                    if (taskReportsSection) {
+                        taskReportsSection.style.display = 'block';
+                        console.log('Task Reports section displayed'); // Debug log
+                    }
+                } else if (linkText === 'VA Utilization') {
+                    const vaUtilizationSection = document.querySelector('.va-utilization-section');
+                    if (vaUtilizationSection) {
+                        vaUtilizationSection.style.display = 'block';
+                        console.log('VA Utilization section displayed'); // Debug log
+                    }
                 }
             });
         });

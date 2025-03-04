@@ -234,62 +234,234 @@
             </div>
         </div>
 
-        <!-- Tasks section -->
-        <div class="task-workspace">
+        <!-- Task Page -->
+        <div class="task-page">
+            <!-- Task Page Header -->
             <div class="task-header">
-                <h1>Task Dashboard</h1>
-                <div class="header-actions">
-                    <div class="search-box">
-                        <input type="text" placeholder="Search tasks..." 
-                               aria-label="Search tasks" 
-                               class="search-input">
-                        <button type="button" class="quick-search" aria-label="Quick search">
-                            Quick search
-                        </button>
-                    </div>
-                    <button class="create-task">Create Task</button>
+                <h1>My Tasks</h1>
+                <div class="task-actions">
+                    <button class="add-task-btn">
+                        <i class="fas fa-plus"></i> New Task
+                    </button>
                 </div>
             </div>
 
-            <div class="task-filters">
-                <div class="filter-buttons">
-                    <button class="filter-btn active">All Tasks</button>
-                    <button class="filter-btn">Pending</button>
-                    <button class="filter-btn">In Progress</button>
-                    <button class="filter-btn">Completed</button>
-                </div>
-            </div>
-
-            <div class="task-stats">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-list"></i>
+            <!-- Task Overview Cards -->
+            <div class="task-overview">
+                <div class="overview-card">
+                    <div class="card-icon pending">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <div class="stat-info">
-                        <h3>Total Tasks</h3>
-                        <span class="stat-number">0</span>
+                    <div class="card-details">
+                        <h3>Pending</h3>
+                        <p class="count">5</p>
                     </div>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">
+                <div class="overview-card">
+                    <div class="card-icon progress">
                         <i class="fas fa-spinner"></i>
                     </div>
-                    <div class="stat-info">
+                    <div class="card-details">
                         <h3>In Progress</h3>
-                        <span class="stat-number">5</span>
+                        <p class="count">3</p>
                     </div>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">
+                <div class="overview-card">
+                    <div class="card-icon completed">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <div class="stat-info">
+                    <div class="card-details">
                         <h3>Completed</h3>
-                        <span class="stat-number">7</span>
+                        <p class="count">8</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Task List Section -->
+            <div class="task-list-container">
+                <div class="task-list-header">
+                    <div class="list-title">
+                        <h2>Current Tasks</h2>
+                    </div>
+                    <div class="list-filters">
+                        <select class="filter-select">
+                            <option value="all">All Tasks</option>
+                            <option value="pending">Pending</option>
+                            <option value="progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="task-items">
+                    <!-- Task items will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Add this inside main-container, at the same level as other sections -->
+        <div class="task-reports-section">
+            <div class="reports-header">
+                <h1>Task Reports</h1>
+                <div class="reports-controls">
+                    <div class="date-filters">
+                        <div class="date-input">
+                            <label>From:</label>
+                            <input type="date">
+                        </div>
+                        <div class="date-input">
+                            <label>To:</label>
+                            <input type="date">
+                        </div>
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button class="export-btn">
+                            <i class="fas fa-file-export"></i> Export to Excel
+                        </button>
+                    </div>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search tasks...">
+                    </div>
+                </div>
+            </div>
+            <div class="reports-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>Date</th>
+                            <th>Account Name</th>
+                            <th>Project Name</th>
+                            <th>Tasks</th>
+                            <th>Billed Hours</th>
+                            <th>Doer</th>
+                            <th>Approved By</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample data row -->
+                        <tr>
+                            <td>TSK-001</td>
+                            <td>2024-04-01</td>
+                            <td>Client A</td>
+                            <td>Website Redesign</td>
+                            <td>Homepage Layout</td>
+                            <td>4.5</td>
+                            <td>John Doe</td>
+                            <td>Jane Smith</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Add this inside main-container, at the same level as other sections -->
+        <div class="va-utilization-section">
+            <div class="utilization-header">
+                <h1>VA Utilization</h1>
+                <div class="utilization-filters">
+                    <div class="filter-group">
+                        <select class="filter-select">
+                            <option value="">Select Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <!-- Add other months -->
+                        </select>
+                        <select class="filter-select">
+                            <option value="">Select Year</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="">Billable/Non-Billable</option>
+                            <option value="billable">Billable</option>
+                            <option value="non-billable">Non-Billable</option>
+                        </select>
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="utilization-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VA Names</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>13</th>
+                            <th>14</th>
+                            <th>15</th>
+                            <th>16</th>
+                            <th>17</th>
+                            <th>18</th>
+                            <th>19</th>
+                            <th>20</th>
+                            <th>21</th>
+                            <th>22</th>
+                            <th>23</th>
+                            <th>24</th>
+                            <th>25</th>
+                            <th>26</th>
+                            <th>27</th>
+                            <th>28</th>
+                            <th>29</th>
+                            <th>30</th>
+                            <th>31</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>176</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
