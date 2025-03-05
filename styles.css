@@ -652,9 +652,8 @@ body {
 }
 
 .welcome-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 20px;
+    overflow: hidden;
     text-align: center;
 }
 
@@ -7999,7 +7998,7 @@ body {
     height: auto; /* Change from fixed height if it exists */
     min-height: 100%;
     padding: 24px;
-    overflow-y: auto;
+    
 }
 
 /* If you have any cards or sections inside */
