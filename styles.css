@@ -183,6 +183,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    text-align: center;
+   
     background: linear-gradient(
         135deg,
         #4fd1c5 0%,
@@ -258,11 +260,13 @@ body {
     scrollbar-color: #4fd1c5 transparent;
     z-index: 1000;
     overflow-y: auto;
+        transition: left 0.3s ease;
+        padding-bottom: 100px;
+        bottom: 0;
+        
 }
 
-.sidebar::-webkit-scrollbar {
-    width: 6px;
-}
+
 
 .sidebar::-webkit-scrollbar-thumb {
     background: #4fd1c5;
@@ -412,12 +416,6 @@ body {
 .referral-container:hover {
     transform: scale(1.02);
 }
-
-.header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
 .animate-title {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
@@ -616,15 +614,11 @@ body {
 .main-container {
     background-color: rgb(255, 255, 255);
     color: white;
-    padding: 0 24px; /* Reduced padding */
     text-align: center;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-left: calc(250px + 7%);
     width: 100%;
-    max-width: 1400px;
+    max-width: 1540px;
     height: 100%; /* Subtract margins */
     overflow: hidden; /* Prevent scrolling */
 }
@@ -652,9 +646,12 @@ body {
 }
 
 .welcome-content {
-    padding: 20px;
     overflow: hidden;
     text-align: center;
+    height: auto; /* Change from fixed height if it exists */
+    min-height: 100%;
+    padding: 24px;
+    
 }
 
 .welcome-message {
@@ -1152,22 +1149,9 @@ body {
         margin-left: auto;
     }
 
-    /* Sidebar fixes */
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: -250px; /* Hide sidebar by default */
-        height: 100vh;
-        width: 250px;
-        z-index: 1001;
-        transition: left 0.3s ease;
-        overflow-y: auto;
-    }
-
-    .sidebar.active {
-        left: 0;
-    }
-
+  
+   
+    
     /* Add hamburger menu */
     .mobile-menu-btn {
         display: block;
@@ -1179,13 +1163,9 @@ body {
         margin-right: 15px;
     }
 
-    /* Main content adjustment */
-    .main-container {
-        margin-top: 80px; /* Add space for fixed header */
-        margin-left: 0;
-        width: 100%;
-        padding: 15px;
-    }
+    
+        
+
 
     .task-container {
         width: calc(100% - 40px);
@@ -1563,9 +1543,7 @@ body {
 }
 
 /* Main container */
-.main-container {
-    margin-left: 400px;
-}
+
 
 /* Task container */
 .task-container {
@@ -5342,9 +5320,7 @@ body {
 }
 
 /* Add this to ensure the main content doesn't overlap */
-.main-container {
-    margin-right: 200px; /* Same as weekly-overview width */
-}
+
 
 /* Modal Overlay with Blur */
 .modal-overlay {
@@ -7728,9 +7704,7 @@ body {
 }
 
 /* Remove the main container scroll */
-.main-container {
-    overflow-y: hidden;
-}
+
 
 /* Adjust action buttons to be more compact */
 .btn-action {
@@ -7994,12 +7968,7 @@ body {
 }
 
 /* Update the welcome content styles */
-.welcome-content {
-    height: auto; /* Change from fixed height if it exists */
-    min-height: 100%;
-    padding: 24px;
-    
-}
+
 
 /* If you have any cards or sections inside */
 .job-card, .position-section {
