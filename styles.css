@@ -52,11 +52,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow-x: hidden; /* Prevents horizontal scroll */
+    
     .task-page {
         padding: 24px;
-    background: #f8fafc;
-    height: 100%;
-        overflow-y: auto;
     }
     
     .task-header {
@@ -618,9 +616,12 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 1540px;
+    max-width: 1610px;
     height: 100%; /* Subtract margins */
     overflow: hidden; /* Prevent scrolling */
+    overflow-y: auto;
+    padding-bottom: 40px;
+    margin-left: calc(280px + 1px);
 }
 
 .banner-wrapper {
@@ -785,9 +786,6 @@ body {
 .loading {
     animation: pulse 1.5s infinite ease-in-out;
 }
-
-/* Better focus states */
-
 
 .task-container {
     max-width: 1200px;
@@ -1149,9 +1147,6 @@ body {
         margin-left: auto;
     }
 
-  
-   
-    
     /* Add hamburger menu */
     .mobile-menu-btn {
         display: block;
@@ -1162,9 +1157,6 @@ body {
         cursor: pointer;
         margin-right: 15px;
     }
-
-    
-        
 
 
     .task-container {
@@ -1542,31 +1534,6 @@ body {
     color: #64748b;
 }
 
-/* Main container */
-
-
-/* Task container */
-.task-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    margin-right:290px;
-    margin-top: 80px;
-    background: white;
-    border-radius: 12px;
-}
-
-/* Main Container */
-.task-container {
-    max-width: 1400px;
-    margin: 24px auto;
-    padding: 32px;
-    background: var(--surface);
-    border-radius: 28px;
-    box-shadow: 
-        0 4px 80px rgba(26, 43, 75, 0.05),
-        0 2px 20px rgba(26, 43, 75, 0.03);
-}
 
 /* Dashboard Header */
 .header-section {
@@ -2579,12 +2546,7 @@ body {
     padding: 24px;
 }
 
-.task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-}
+
 
 .task-management {
     font-size: 24px;
@@ -2788,12 +2750,7 @@ body {
     width: calc(100vw - 250px);
 }
 
-.task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-}
+
 
 .greeting-section h1 {
     font-size: 24px;
@@ -2846,11 +2803,6 @@ body {
     gap: 16px;
 }
 
-.task-container {
-    height: calc(100vh - 300px);
-    overflow-y: auto;
-    padding-right: 16px;
-}
 
 .task-filters {
     margin-bottom: 24px;
@@ -3167,12 +3119,6 @@ body {
     min-height: 100vh;
 }
 
-.task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
 
 .task-header h1 {
     font-size: 1.75rem;
@@ -3551,7 +3497,7 @@ body {
     display: grid;
     grid-template-columns: 60px 140px 120px 120px 100px 120px 100px 100px;
     padding: 1rem;
-    background: #f8fafc;
+    background: #f5f6f7;
     border-radius: 8px;
     margin-bottom: 0.5rem;
     position: sticky;
@@ -3658,6 +3604,7 @@ body {
 
 /* Enhanced Table Layout */
 .attendance-table {
+    font-size: 0.9rem;
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
@@ -3674,14 +3621,7 @@ body {
     gap: 0.5rem;
 }
 
-.table-header {
-    background: #f1f5f9;
-    font-weight: 600;
-    color: #475569;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-}
+
 
 .table-row {
     transition: all 0.2s ease;
@@ -4124,18 +4064,9 @@ body {
 .stat-icon.break { background: #fff3e0; }
 
 /* Table Styling */
-.attendance-table {
-    margin: 20px;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-}
 
-.table-header {
-    background: #f8f9fa;
-    color: #64748b;
-    font-weight: 500;
-}
+
+
 
 .table-header, .table-row {
     display: grid;
@@ -4330,11 +4261,6 @@ body {
 }
 
 /* Enhanced Table Styles */
-.table-header {
-    background: #f8fafc;
-    border-radius: 8px;
-    margin-bottom: 8px;
-}
 
 .table-row {
     background: white;
@@ -4638,18 +4564,20 @@ body {
 }
 
 .digital-time {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: #1f2937;
+    font-size: 2.8rem;
     font-family: 'Digital-7', monospace;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 0.5rem;
+    font-family: 'SF Mono', monospace;
+    letter-spacing: 2px;
+    font-size: 48px;
+    font-weight: 600;
+     color: var(--primary-color); 
+    text-align: center;
+    margin-bottom: 0.5rem;
 }
 
-.date-display {
-    color: #4b5563;
-    font-size: 1.1rem;
-}
+
 
 .timezone {
     color: #6b7280;
@@ -4966,11 +4894,6 @@ body {
     color: #64748b;
 }
 
-/* Right Panel */
-.attendance-main {
-    padding: 24px;
-    overflow-y: auto;
-}
 
 /* Stats Grid */
 .stats-grid {
@@ -6152,12 +6075,6 @@ body {
     background: #e2e8f0;
 }
 
-/* Main Content */
-.attendance-main {
-    padding: 32px;
-    overflow-y: auto;
-}
-
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -6221,13 +6138,7 @@ body {
     margin-bottom: 24px;
 }
 
-.digital-time {
-    font-size: 48px;
-    font-weight: 700;
-    color: #00c853;
-    font-family: 'SF Mono', monospace;
-    letter-spacing: 2px;
-}
+
 
 .date-info {
     color: #64748b;
@@ -6391,17 +6302,6 @@ body {
     margin-bottom: 24px;
 }
 
-.digital-time {
-    font-size: 48px;
-    font-weight: 600;
-    color: #00C853;
-    font-family: 'SF Mono', monospace;
-}
-
-.date-display {
-    color: #666;
-    margin-top: 8px;
-}
 
 /* Progress Circle */
 .progress-container {
@@ -6735,12 +6635,7 @@ body {
     margin-bottom: 8px;
 }
 
-.date-display {
-    display: flex;
-    gap: 12px;
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-}
+
 
 /* User Status Styles */
 .user-status {
@@ -7027,16 +6922,18 @@ body {
     }
 }
 
+
 /* Update the attendance styles */
 .attendance-modern {
-    display: none; /* Hidden by default */
-    margin: 20px;
-    background: #ffffff;
+    display: none; 
+    margin: 30px;
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    padding: 24px;
-    animation: fadeIn 0.3s ease;
-}
+    animation: fadeIn 1s ease;
+    background: #f8fafc;
+    padding: 2rem;
+     overflow: hidden;
+} 
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -7076,10 +6973,7 @@ body {
 }
 
 /* Modern Attendance Styles */
-.attendance-modern {
-    background: #f8fafc;
-    padding: 2rem;
-}
+
 
 .attendance-dashboard {
     display: grid;
@@ -7130,12 +7024,6 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.status-ring {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    margin: 0 auto 1.5rem;
-}
 
 .ring-bg, .ring-progress {
     fill: none;
@@ -7194,13 +7082,6 @@ body {
 }
 
 /* Main Content Area */
-.attendance-main {
-    background: white;
-    padding: 2rem;
-    border-radius: 24px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
 /* Stats Grid */
 .stats-grid {
     display: grid;
@@ -7239,11 +7120,8 @@ body {
     }
 }
 
-/* Update your existing attendance styles */
-.attendance-modern {
-    padding: 2rem;
-    background: #f8fafc;
-}
+
+
 
 .attendance-header {
     margin-bottom: 2rem;
@@ -7262,8 +7140,9 @@ body {
 
 .attendance-grid {
     display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 2rem;
+    grid-template-columns: 250px 1fr;
+    gap: 1rem;
+   
 }
 
 /* Time and Status Card */
@@ -7274,28 +7153,7 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.digital-time {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    font-family: 'SF Mono', monospace;
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
 
-.date-display {
-    text-align: center;
-    color: #64748b;
-    margin-bottom: 2rem;
-}
-
-/* Status Ring */
-.status-ring {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    margin: 0 auto 2rem;
-}
 
 .status-ring svg {
     transform: rotate(-90deg);
@@ -7368,11 +7226,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.attendance-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-}
+
 
 .attendance-table th {
     background: #f8fafc;
@@ -7436,12 +7290,7 @@ body {
 }
 
 /* Add these new styles for the enhanced attendance section */
-.attendance-modern {
-    background: #f8fafc;
-    padding: 2rem;
-    border-radius: 20px;
-    margin: 20px;
-}
+
 
 .attendance-header {
     display: flex;
@@ -7500,45 +7349,8 @@ body {
     color: #64748b;
 }
 
-.attendance-grid {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 2rem;
-}
 
-.attendance-card {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
 
-.digital-time {
-    font-size: 3.5rem;
-    font-weight: 600;
-    color: #4fd1c5;
-    font-family: 'SF Mono', monospace;
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
-
-.date-display {
-    text-align: center;
-    color: #64748b;
-    margin-bottom: 2rem;
-}
-
-/* Status Ring */
-.status-ring {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    margin: 0 auto 2rem;
-}
-
-.status-ring svg {
-    transform: rotate(-90deg);
-}
 
 .ring-bg, .ring-progress {
     fill: none;
@@ -7599,19 +7411,6 @@ body {
 .legend-item i.leave { color: #8b5cf6; }
 .legend-item i.overtime { color: #3b82f6; }
 
-/* Table Styles */
-.attendance-table-container {
-    background: white;
-    border-radius: 20px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.attendance-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-}
 
 .attendance-table th {
     background: #f8fafc;
@@ -7674,39 +7473,16 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Adjust the attendance modern container size */
-.attendance-modern {
-    padding: 1.5rem;
-    margin: 10px;
-}
 
-/* Make the attendance grid more compact */
-.attendance-grid {
-    grid-template-columns: 300px 1fr; /* Reduce left column width from 350px */
-    gap: 1rem; /* Reduce gap from 2rem */
-}
 
 /* Make the time card more compact */
-.attendance-card {
-    padding: 1.5rem;
-}
+
 
 /* Adjust the digital time size */
 .digital-time {
     font-size: 2.8rem; /* Reduce from 3.5rem */
 }
 
-/* Make the status ring smaller */
-.status-ring {
-    width: 150px; /* Reduce from 180px */
-    height: 150px;
-    margin: 1rem auto;
-}
-
-/* Remove the main container scroll */
-
-
-/* Adjust action buttons to be more compact */
 .btn-action {
     padding: 0.75rem;
     margin-bottom: 0.4rem;
@@ -7718,16 +7494,10 @@ body {
 }
 
 /* Adjust table padding */
-.attendance-table-container {
-    padding: 1rem;
-}
+
 
 /* Adjust table and header sizes */
-.attendance-table {
-    width: 100%;
-    font-size: 0.9rem; /* Reduce font size */
-    border-collapse: collapse;
-}
+
 
 .attendance-table th,
 .attendance-table td {
@@ -7776,35 +7546,10 @@ body {
     font-size: 0.8rem;
 }
 
-/* Adjust the table container */
-.attendance-table-container {
-    padding: 0.75rem;
-    margin-top: 1rem;
-}
 
-/* Make sure the grid layout gives more space to the table */
-.attendance-grid {
-    grid-template-columns: 250px 1fr; /* Further reduce left column width */
-    gap: 0.75rem; /* Reduce gap more */
-}
-
-/* Adjust table container to show full width */
-.attendance-table-container {
-    width: 100%;
-    overflow-x: auto; /* Allow horizontal scroll if needed */
-    padding: 1rem;
-    margin-top: 1rem;
-    background: white;
-    border-radius: 12px;
-}
 
 /* Ensure table takes full width and handles overflow properly */
-.attendance-table {
-    width: 100%;
-    min-width: 1200px; /* Minimum width to ensure all columns are visible */
-    border-collapse: collapse;
-    font-size: 0.9rem;
-}
+
 
 /* Adjust column widths to fit content */
 .attendance-table th,
@@ -7857,10 +7602,7 @@ body {
 }
 
 /* Make the grid layout give more space to the table */
-.attendance-grid {
-    grid-template-columns: 250px 1fr;
-    gap: 1rem;
-}
+
 
 /* Add navigation arrows */
 .attendance-navigation {
@@ -7932,20 +7674,13 @@ body {
 
 /* Update attendance table container to remove scroll */
 
-.attendance-table {
-    margin-bottom: 1rem;
-}
+
 
 /* Ensure table rows are consistent height */
 .attendance-table tr {
     height: 60px; /* Adjust this value as needed */
 }
 
-.attendance-table {
-    margin-bottom: 1rem;
-    table-layout: fixed;
-    width: 100%;
-}
 
 .attendance-table tbody {
     display: block;
@@ -7961,11 +7696,7 @@ body {
 }
 
 /* First, ensure the main container has proper height and overflow settings */
-.main-container {
-    
-    overflow-y: auto;
-    padding-bottom: 40px; /* Add some padding at the bottom */
-}
+
 
 /* Update the welcome content styles */
 
