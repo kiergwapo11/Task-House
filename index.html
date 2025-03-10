@@ -137,7 +137,7 @@
         <div class="attendance-modern">
             <div class="attendance-header">
                 <div class="header-left">
-                    <h2>ATTENDANCE TRACKER</h2>
+                    <h2>Attendance</h2>
                     <div class="date-range">
                         <i class="fas fa-calendar-alt"></i>
                         <select class="date-range-select">
@@ -199,7 +199,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Schedule</th>
+                                <th>Date</th>
                                 <th>Time In</th>
                                 <th>Time Out</th>
                                 <th>Break</th>
@@ -216,20 +216,16 @@
                             <!-- Dynamic content will be inserted here -->
                         </tbody>
                     </table>
+                    <!-- Add this inside the attendance-table-container div -->
+                    <div class="pagination">
+                        <button id="prevPage" class="pagination-btn" disabled>Previous</button>
+                        <span id="pageNumbers"></span>
+                        <button id="nextPage" class="pagination-btn">Next</button>
+                    </div>
                 </div>
 
                 <!-- Add after the attendance table -->
-                <div class="attendance-navigation">
-                    <button class="nav-arrow prev" id="prevRecords">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <span class="pagination-info">
-                         <span id="currentPage"></span>
-                    </span>
-                    <button class="nav-arrow next" id="nextRecords">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+             
             </div>
         </div>
 
@@ -526,4 +522,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

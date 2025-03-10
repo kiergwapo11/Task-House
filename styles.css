@@ -627,6 +627,7 @@ body {
 .banner-wrapper {
     width: 100%;
     display: flex;
+    animation: fadeInUp 0.8s ease 0.2s backwards;
     justify-content: center;
     padding: 1rem;
     margin-top: 2rem;
@@ -736,6 +737,7 @@ body {
 
 .highlight-text {
     font-size: 1.3rem;
+    animation: fadeIn 1s ease;
     color: #1E293B; /* Dark color for highlight text */
     line-height: 1.5;
 }
@@ -3611,7 +3613,9 @@ body {
     background: white;
     border-radius: 12px;
     overflow: hidden;
+    
 }
+
 
 .table-header, .table-row {
     display: grid;
@@ -4881,7 +4885,9 @@ body {
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
+    font-size: 1rem;
 }
 
 .clock-in-btn {
@@ -7149,7 +7155,7 @@ body {
 .attendance-card {
     background: white;
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -7224,6 +7230,8 @@ body {
     border-radius: 20px;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    max-height: 700px; /* Adjust the height as needed */
+    
 }
 
 
@@ -7412,14 +7420,7 @@ body {
 .legend-item i.overtime { color: #3b82f6; }
 
 
-.attendance-table th {
-    background: #f8fafc;
-    padding: 1rem;
-    text-align: left;
-    font-weight: 500;
-    color: #64748b;
-    border-bottom: 2px solid #e2e8f0;
-}
+
 
 .attendance-table td {
     padding: 1rem;
@@ -7904,3 +7905,29 @@ body {
     background: #f1f5f9;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.pagination-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagination-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+#pageNumbers {
+    font-size: 1rem;
+    color: #334155;
+}
