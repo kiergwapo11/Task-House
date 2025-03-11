@@ -432,7 +432,7 @@ body {
     background: var(--card-bg);
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -761,11 +761,6 @@ body {
     50% { opacity: 0.7; }
     100% { opacity: 1; }
 }
-
-.loading {
-    animation: pulse 1.5s infinite ease-in-out;
-}
-
 .task-container {
     max-width: 1200px;
     margin: 24px auto;
@@ -3224,28 +3219,8 @@ body {
     text-decoration: none;
 }
 
-/* Attendance Modal Styles */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
-    background: white;
-    border-radius: 12px;
-    z-index: 1000;
-    display: none; /* Initially hidden */
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
 
-.attendance-modal.active {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
+
 
 .modal-overlay {
     display: none;
@@ -3708,18 +3683,7 @@ body {
     display: none;
 }
 
-/* Attendance Modal */
-.attendance-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: white;
-    z-index: 10000;
-    display: none;
-    overflow: auto;
-}
+
 
 /* Modal Header */
 .modal-header {
@@ -4021,7 +3985,7 @@ body {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.modal-overlay {
+.modal-overlay { 
     display: none;
     position: fixed;
     top: 0;
@@ -4110,29 +4074,17 @@ body {
 
 /* Modal and Overlay */
 .modal-overlay {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-    z-index: 9999;
-    display: none;
+    backdrop-filter: blur(4px);
+    z-index: 998;
 }
 
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 400px;
-    background: white;
-    border-radius: 12px;
-    z-index: 999;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
 
 .modal-header {
     padding: 20px;
@@ -4178,7 +4130,7 @@ body {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.95);
     width: 90%;
     max-width: 400px;
     background: white;
