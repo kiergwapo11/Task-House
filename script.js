@@ -160,7 +160,9 @@ class AttendanceSystem {
             breakDuration: 0,
             currentRow: null,
             recordCount: 0,
-            records: []
+            records: [],
+            currentPage: 1,
+            recordsPerPage: 6 // Adjusted to 6 as per your context
         };
 
         // Initialize buttons
@@ -171,16 +173,35 @@ class AttendanceSystem {
         this.clockDisplay = document.querySelector('.digital-time');
         this.dateDisplay = document.querySelector('.date-display');
         this.workedHoursDisplay = document.getElementById('todayHours');
+        this.prevPageBtn = document.getElementById('prevPage');
+        this.nextPageBtn = document.getElementById('nextPage');
+        this.pageNumbers = document.getElementById('pageNumbers');
 
         // Add event listeners
         if (this.timeInBtn) {
             this.timeInBtn.addEventListener('click', () => this.handleTimeIn());
+        } else {
+            console.error('timeInBtn not found');
         }
         if (this.breakBtn) {
             this.breakBtn.addEventListener('click', () => this.handleBreak());
+        } else {
+            console.error('breakBtn not found');
         }
         if (this.timeOutBtn) {
             this.timeOutBtn.addEventListener('click', () => this.handleTimeOut());
+        } else {
+            console.error('timeOutBtn not found');
+        }
+        if (this.prevPageBtn) {
+            this.prevPageBtn.addEventListener('click', () => this.changePage(-1));
+        } else {
+            console.error('prevPageBtn not found');
+        }
+        if (this.nextPageBtn) {
+            this.nextPageBtn.addEventListener('click', () => this.changePage(1));
+        } else {
+            console.error('nextPageBtn not found');
         }
 
         // Start clock update
@@ -190,6 +211,9 @@ class AttendanceSystem {
         // Set initial button states
         if (this.breakBtn) this.breakBtn.disabled = true;
         if (this.timeOutBtn) this.timeOutBtn.disabled = true;
+
+        // Load initial data
+        this.loadInitialData();
     }
 
     handleTimeIn() {
@@ -200,50 +224,102 @@ class AttendanceSystem {
         this.state.startTime = now;
         this.state.recordCount++; // Increment record counter
 
-        // Create table row
-        const row = document.createElement('tr');
-        const rowId = `attendance-${Date.now()}`;
-        row.id = rowId;
-        this.state.currentRow = rowId;
-        
-        row.innerHTML = `
-            <td>${this.state.recordCount}</td>
-            <td>
-                <div class="schedule-info">
-                    <div>${this.formatDate(now)}</div>
-                    <div class="time-range">1:00 PM - 10:00 PM</div>
-                </div>
-            </td>
-            <td>${this.formatTime(now)}</td>
-            <td>-</td>
-            <td>-</td>
-            <td>0:00</td>
-            <td>Pending</td>
-            <td>-</td>
-            <td>0:00</td>
-            <td>0:00</td>
-            <td><span class="status-badge in-progress">Working</span></td>
-            <td>
-                <button class="action-btn">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-            </td>
-        `;
+        // Create record
+        const record = {
+            id: Date.now(),
+            number: this.state.recordCount,
+            date: this.formatDate(now),
+            timeIn: this.formatTime(now),
+            timeOut: '-',
+            break: '-',
+            tardiness: '0:00',
+            undertime: 'Pending',
+            breakTwo: '-',
+            workedHours: '0:00',
+            excessHours: '0:00',
+            status: 'in-progress'
+        };
 
-        // Add row to table
-        if (this.tbody) {
-            // Remove scroll if more than 5 rows
-            const rows = this.tbody.getElementsByTagName('tr');
-            if (rows.length >= 5) {
-                rows[0].remove(); // Remove the first row instead of the last
-            }
-            this.tbody.appendChild(row); // Append to end instead of inserting at beginning
-        }
+        // Add record to state
+        this.state.records.push(record);
+        this.state.currentRow = record.id; // Set current row to the new record
+
+        console.log('Record added:', record); // Debug log
+
+        // Update table display
+        this.updateTableDisplay();
 
         // Enable/disable buttons
         if (this.timeInBtn) this.timeInBtn.disabled = true;
         if (this.breakBtn) this.breakBtn.disabled = false;
         if (this.timeOutBtn) this.timeOutBtn.disabled = false;
+    }
+
+    handleBreak() {
+        if (!this.state.isWorking) return;
+
+        const now = new Date();
+        const record = this.state.records.find(r => r.id === this.state.currentRow);
+
+        if (!this.state.isOnBreak) {
+            // Start Break
+            this.state.isOnBreak = true;
+            this.state.breakStartTime = now;
+            if (this.breakBtn) {
+                this.breakBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
+            }
+
+            // Update record status to show "On Break"
+            if (record) {
+                record.status = 'break';
+            }
+        } else {
+            // End Break
+            this.state.isOnBreak = false;
+            this.state.breakDuration += now - this.state.breakStartTime;
+            if (this.breakBtn) {
+                this.breakBtn.innerHTML = '<i class="fas fa-coffee"></i> Break';
+            }
+
+            // Update record to show break duration and working status
+            if (record) {
+                record.break = `${Math.floor(this.state.breakDuration / (1000 * 60))} min`;
+                record.status = 'in-progress';
+            }
+        }
+
+        // Update table display
+        this.updateTableDisplay();
+    }
+
+    handleTimeOut() {
+        if (!this.state.isWorking) return;
+
+        const now = new Date();
+        const record = this.state.records.find(r => r.id === this.state.currentRow);
+
+        if (record) {
+            record.timeOut = this.formatTime(now); // Time Out
+            record.break = `${Math.floor(this.state.breakDuration / (1000 * 60))} min`; // Break duration
+            record.workedHours = this.calculateWorkedHours(this.state.startTime, now); // Worked Hours
+            record.status = 'completed';
+        }
+
+        // Reset state
+        this.state.isWorking = false;
+        this.state.isOnBreak = false;
+        this.state.startTime = null;
+        this.state.breakStartTime = null;
+        this.state.breakDuration = 0;
+        this.state.currentRow = null;
+
+        // Reset buttons
+        if (this.timeInBtn) this.timeInBtn.disabled = false;
+        if (this.breakBtn) this.breakBtn.disabled = true;
+        if (this.timeOutBtn) this.timeOutBtn.disabled = true;
+
+        // Update table display
+        this.updateTableDisplay();
     }
 
     updateTableDisplay() {
@@ -253,6 +329,8 @@ class AttendanceSystem {
         const startIndex = (this.state.currentPage - 1) * this.state.recordsPerPage;
         const endIndex = startIndex + this.state.recordsPerPage;
         const recordsToShow = this.state.records.slice(startIndex, endIndex);
+
+        console.log('Displaying records:', recordsToShow); // Debug log
 
         // Clear current table
         this.tbody.innerHTML = '';
@@ -287,120 +365,26 @@ class AttendanceSystem {
     }
 
     updatePaginationControls() {
-        const prevBtn = document.getElementById('prevRecords');
-        const nextBtn = document.getElementById('nextRecords');
-        
-        if (prevBtn) {
-            prevBtn.disabled = this.state.currentPage === 1;
-        }
-        
-        if (nextBtn) {
-            const maxPages = Math.ceil(this.state.records.length / this.state.recordsPerPage);
-            nextBtn.disabled = this.state.currentPage >= maxPages;
-        }
+        const totalPages = Math.ceil(this.state.records.length / this.state.recordsPerPage);
+        this.prevPageBtn.disabled = this.state.currentPage === 1;
+        this.nextPageBtn.disabled = this.state.currentPage === totalPages;
+
+        // Update page numbers display
+        this.pageNumbers.textContent = `Page ${this.state.currentPage} of ${totalPages}`;
     }
 
-    navigateRecords(direction) {
-        if (direction === 'prev' && this.state.currentPage > 1) {
+    changePage(direction) {
+        const totalPages = Math.ceil(this.state.records.length / this.state.recordsPerPage);
+        if (direction === -1 && this.state.currentPage > 1) {
             this.state.currentPage--;
-        } else if (direction === 'next') {
-            const maxPages = Math.ceil(this.state.records.length / this.state.recordsPerPage);
-            if (this.state.currentPage < maxPages) {
-                this.state.currentPage++;
-            }
+        } else if (direction === 1 && this.state.currentPage < totalPages) {
+            this.state.currentPage++;
         }
-        
+
+        console.log('Current page:', this.state.currentPage); // Debug log
+
+        // Update table display
         this.updateTableDisplay();
-    }
-
-    formatDuration(ms) {
-        const minutes = Math.floor(ms / (1000 * 60));
-        const hours = Math.floor(minutes / 60);
-        const remainingMinutes = minutes % 60;
-        return `${hours}:${remainingMinutes.toString().padStart(2, '0')}`;
-    }
-
-    handleBreak() {
-        if (!this.state.isWorking) return;
-
-        const now = new Date();
-        if (!this.state.isOnBreak) {
-            // Start Break
-            this.state.isOnBreak = true;
-            this.state.breakStartTime = now;
-            if (this.breakBtn) {
-                this.breakBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
-            }
-            
-            // Update row status to show "On Break"
-            const row = document.getElementById(this.state.currentRow);
-            if (row) {
-                const cells = row.getElementsByTagName('td');
-                cells[10].innerHTML = '<span class="status-badge break">On Break</span>';
-            }
-        } else {
-            // End Break
-            this.state.isOnBreak = false;
-            this.state.breakDuration += now - this.state.breakStartTime;
-            if (this.breakBtn) {
-                this.breakBtn.innerHTML = '<i class="fas fa-coffee"></i> Break';
-            }
-            
-            // Update row to show break duration and working status
-            const row = document.getElementById(this.state.currentRow);
-            if (row) {
-                const cells = row.getElementsByTagName('td');
-                cells[4].textContent = `${Math.floor(this.state.breakDuration / (1000 * 60))} min`; // Break duration
-                cells[10].innerHTML = '<span class="status-badge in-progress">Working</span>';
-            }
-        }
-    }
-
-    handleTimeOut() {
-        if (!this.state.isWorking) return;
-
-        const now = new Date();
-        const row = document.getElementById(this.state.currentRow);
-        
-        if (row) {
-            const cells = row.getElementsByTagName('td');
-            cells[3].textContent = this.formatTime(now); // Time Out
-            cells[4].textContent = `${Math.floor(this.state.breakDuration / (1000 * 60))} min`; // Break duration
-            cells[8].textContent = this.calculateWorkedHours(this.state.startTime, now); // Worked Hours
-            cells[10].innerHTML = '<span class="status-badge completed">Completed</span>';
-        }
-
-        // Reset state
-        this.state.isWorking = false;
-        this.state.isOnBreak = false;
-        this.state.startTime = null;
-        this.state.breakStartTime = null;
-        this.state.breakDuration = 0;
-        this.state.currentRow = null;
-
-        // Reset buttons
-        if (this.timeInBtn) this.timeInBtn.disabled = false;
-        if (this.breakBtn) this.breakBtn.disabled = true;
-        if (this.timeOutBtn) this.timeOutBtn.disabled = true;
-    }
-
-    formatBreakDuration() {
-        const minutes = Math.floor(this.state.breakDuration / (1000 * 60));
-        return `${minutes} min`;
-    }
-
-    updateClock() {
-        const now = new Date();
-        if (this.clockDisplay) {
-            this.clockDisplay.textContent = this.formatTime(now);
-        }
-        if (this.dateDisplay) {
-            this.dateDisplay.textContent = this.formatDate(now);
-        }
-        if (this.state.isWorking && this.workedHoursDisplay) {
-            const worked = this.calculateWorkedHours(this.state.startTime, now);
-            this.workedHoursDisplay.textContent = worked;
-        }
     }
 
     formatDate(date) {
@@ -429,154 +413,25 @@ class AttendanceSystem {
         return `${hours}:${minutes.toString().padStart(2, '0')}`;
     }
 
+    updateClock() {
+        const now = new Date();
+        if (this.clockDisplay) {
+            this.clockDisplay.textContent = this.formatTime(now);
+        }
+        if (this.dateDisplay) {
+            this.dateDisplay.textContent = this.formatDate(now);
+        }
+        if (this.state.isWorking && this.workedHoursDisplay) {
+            const worked = this.calculateWorkedHours(this.state.startTime, now);
+            this.workedHoursDisplay.textContent = worked;
+        }
+    }
+
     loadInitialData() {
-        const tbody = document.getElementById('attendanceTableBody');
-        if (!tbody) return;
-
-        // Sample data structure
-        const sampleData = [
-            {
-                id: 1,
-                schedule: {
-                    date: 'February 27, 2025',
-                    in: '1:00 PM',
-                    out: '10:00 PM'
-                },
-                attendance: {
-                    in: '12:57 PM',
-                    out: '10:02 PM'
-                },
-                break: '1:0',
-                tardiness: '0:00',
-                undertime: '0:00',
-                workedHours: '9:05',
-                excessHours: '0:02',
-                status: 'approved'
-            }
-            // Add more sample data as needed
-        ];
-
-        tbody.innerHTML = sampleData.map((record, index) => `
-            <tr>
-                <td>${index + 1}</td>
-                <td>
-                    <div class="schedule-info">
-                        <div>${record.schedule.date}</div>
-                        <div class="time-range">${record.schedule.in} - ${record.schedule.out}</div>
-                    </div>
-                </td>
-                <td>${record.attendance.in}</td>
-                <td>${record.attendance.out}</td>
-                <td>${record.break}</td>
-                <td>${record.tardiness}</td>
-                <td>${record.undertime}</td>
-                <td>${record.break}</td>
-                <td>${record.workedHours}</td>
-                <td>${record.excessHours}</td>
-                <td><span class="status-badge ${record.status}">${record.status}</span></td>
-                <td>
-                    <button class="action-btn">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                </td>
-            </tr>
-        `).join('');
-    }
-
-    addAttendanceRecord(action, time) {
-        const tbody = document.getElementById('attendanceTableBody');
-        if (!tbody) {
-            console.error('Table body not found!');
-            return;
-        }
-
-        const formattedTime = this.formatTime(time);
-        const formattedDate = this.formatDate(time);
-
-        if (action === 'Time In') {
-            const row = document.createElement('tr');
-            const rowId = `attendance-row-${this.state.rowCounter++}`;
-            row.id = rowId;
-            this.state.currentRow = rowId;
-
-            row.innerHTML = `
-                <td>${this.state.rowCounter}</td>
-                <td>${formattedDate}</td>
-                <td>${formattedTime}</td>
-                <td>-</td>
-                <td>-</td>
-                <td>0:00</td>
-                <td><span class="status-badge in-progress">In Progress</span></td>
-                <td>
-                    <button class="action-btn">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                </td>
-            `;
-            
-            tbody.insertBefore(row, tbody.firstChild);
-        } else if (action === 'Time Out' && this.state.currentRow) {
-            const row = document.getElementById(this.state.currentRow);
-            if (row) {
-                const cells = row.getElementsByTagName('td');
-                cells[3].textContent = formattedTime; // Time Out
-                cells[5].textContent = this.calculateWorkedHours(this.state.startTime, time); // Hours
-                cells[6].innerHTML = '<span class="status-badge completed">Completed</span>';
-            }
-            this.state.currentRow = null;
-        }
-    }
-
-    loadAttendanceHistory() {
-        // Implement loading attendance history from storage
-    }
-
-    updateStatusRing(hoursWorked) {
-        const ring = document.querySelector('.ring-progress');
-        if (!ring) return;
-
-        const circumference = 2 * Math.PI * 45; // r=45 from SVG
-        ring.style.strokeDasharray = circumference;
-        
-        // Calculate progress (assuming 8-hour workday)
-        const progress = Math.min(hoursWorked / 8, 1);
-        const offset = circumference - (progress * circumference);
-        
-        ring.style.strokeDashoffset = offset;
-    }
-
-    determineStatus(startTime, endTime, breakDuration) {
-        // You can customize these conditions based on your requirements
-        const scheduleStart = new Date(startTime);
-        scheduleStart.setHours(9, 0, 0); // Set your schedule start time
-
-        const scheduleEnd = new Date(startTime);
-        scheduleEnd.setHours(18, 0, 0); // Set your schedule end time
-
-        if (startTime > scheduleStart) {
-            return 'Late';
-        } else if (endTime < scheduleEnd) {
-            return 'Early Out';
-        } else {
-            return 'Completed';
-        }
-    }
-
-    initializeNavigation() {
-        const prevBtn = document.getElementById('prevRecords');
-        const nextBtn = document.getElementById('nextRecords');
-        
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => this.navigateRecords('prev'));
-        }
-        
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => this.navigateRecords('next'));
-        }
+        // Load initial data if any
+        this.updateTableDisplay();
     }
 }
 
 // Initialize the app
 const app = new TaskHouseApp();
-
-
