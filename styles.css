@@ -1906,10 +1906,6 @@ body {
     color: var(--danger);
 }
 
-/* Action Buttons */
-
-
-
 
 .create-task-btn {
     padding: 12px 24px;
@@ -1928,26 +1924,19 @@ body {
     box-shadow: var(--shadow-lg);
 }
 
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
 
 .modal-content {
     position: relative;
     width: 90%;
     max-width: 500px;
     margin: 50px auto;
-    background: white;
-    border-radius: 16px;
     padding: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal-header {
@@ -3222,16 +3211,6 @@ body {
 
 
 
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
 
 /* Header Styles */
 .modal-header {
@@ -3543,16 +3522,7 @@ body {
     color: #0f172a;
 }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 999;
-}
+
 
 /* Responsive Layout Improvements */
 @media (max-width: 1200px) {
@@ -3671,17 +3641,6 @@ body {
     display: block;
 }
 
-/* Modal Overlay */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-    display: none;
-}
 
 
 
@@ -3729,23 +3688,11 @@ body {
     margin-top: 2rem;
 }
 
-/* Overlay */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .attendance-modal {
-        width: 95%;
-        height: 95vh;
-    }
+   
 
     .table-header, .table-row {
         grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
@@ -3758,39 +3705,9 @@ body {
     }
 }
 
-/* Modern Attendance Modal Styling */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
-    background: white;
-    border-radius: 12px;
-    z-index: 1000;
-    display: none; /* Initially hidden */
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
 
-.attendance-modal.active {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
 
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
+
 
 /* Stats Cards */
 .attendance-stats {
@@ -3944,57 +3861,8 @@ body {
     }
 }
 
-/* Modal and Overlay */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 998;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: none;
-}
 
-.modal-overlay.modal-active {
-    opacity: 1;
-}
 
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
-    background: white;
-    border-radius: 12px;
-    z-index: 1000;
-    display: none; /* Initially hidden */
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.attendance-modal.active {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.modal-overlay { 
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
 
 /* Enhanced Stats Cards */
 .attendance-stats {
@@ -4072,18 +3940,30 @@ body {
     color: #991b1b;
 }
 
-/* Modal and Overlay */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 998;
+
+
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #edf2f7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+
 
 
 .modal-header {
@@ -4107,140 +3987,11 @@ body {
 }
 
 /* Show classes */
-.modal-overlay.show,
-.attendance-modal.show {
-    display: block;
-}
 
-/* Remove all duplicate modal styles and keep just one clean version */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 998;
-}
 
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 400px;
-    background: white;
-    border-radius: 12px;
-    z-index: 999;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
 
-.modal-header {
-    padding: 20px;
-    border-bottom: 1px solid #edf2f7;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.close-modal {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #64748b;
-}
 
-.modal-body {
-    padding: 20px;
-}
-
-/* Show classes */
-.modal-overlay.show,
-.attendance-modal.show {
-    display: block;
-}
-
-/* Remove all duplicate modal styles and keep just one clean version */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 998;
-}
-
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 400px;
-    background: white;
-    border-radius: 12px;
-    z-index: 999;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.attendance-modal.show {
-    display: block;
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.modal-overlay.show {
-    display: block;
-}
-
-/* Attendance Modal Styles */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 998;
-    transition: all 0.3s ease;
-}
-
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 560px;
-    background: white;
-    border-radius: 20px;
-    z-index: 999;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.modal-overlay.show,
-.attendance-modal.show {
-    opacity: 1;
-    display: block;
-}
-
-.attendance-modal.show {
-    transform: translate(-50%, -50%) scale(1);
-}
 
 /* Modal Header */
 .modal-header {
@@ -4492,9 +4243,7 @@ body {
 
 /* Responsive Design */
 @media (max-width: 640px) {
-    .attendance-modal {
-        width: 95%;
-    }
+   
 
     .digital-time {
         font-size: 2.5rem;
@@ -4510,27 +4259,9 @@ body {
 }
 
 /* Modern Attendance Modal */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
-    background: #ffffff;
-    border-radius: 24px;
-    z-index: 1000;
-    display: none;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
 
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
+
+
 
 /* Modal Layout */
 .attendance-dashboard {
@@ -4674,61 +4405,6 @@ body {
     }
 }
 
-.attendance-modal {
-    /* ... existing styles ... */
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* Add backdrop for modal */
-.attendance-modal::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-}
-
-/* Modal Overlay with Blur */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 998;
-    display: none;
-}
-
-/* Improved Attendance Modal */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1000px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 24px;
-    z-index: 1000;
-    display: none;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
 
 .attendance-dashboard {
     display: grid;
@@ -4887,10 +4563,7 @@ body {
 }
 
 /* Show/Hide Modal */
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
+
 
 .productivity-chart {
     background: white;
@@ -4904,119 +4577,16 @@ body {
     margin-top: 16px;
 }
 
-.productivity-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 16px;
-}
 
-.stat-item {
-    text-align: center;
-    padding: 16px;
-    background: #f8fafc;
-    border-radius: 12px;
-}
 
-/* Weekly Overview Panel - Updated */
-.weekly-overview {
-    position: fixed;
-    right: 0;
-    top: 0;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    width: 200px;
-    padding: 20px;
-    box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    z-index: 90;
-}
 
-.weekly-overview-header {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1e293b;
-    margin-top: 60px; /* Space for the header */
-    padding-bottom: 12px;
-    border-bottom: 1px solid #e2e8f0;
-}
 
-.day-entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 8px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-}
 
-.day-entry:hover {
-    background: rgba(248, 250, 252, 0.8);
-}
-
-.day-name {
-    color: #64748b;
-    font-size: 14px;
-}
-
-.day-hours {
-    font-weight: 500;
-    color: #1e293b;
-    font-size: 14px;
-}
-
-.current-day {
-    background: #f8fafc;
-}
-
-.current-day .day-name {
-    color: var(--primary-color);
-    font-weight: 500;
-}
 
 /* Add this to ensure the main content doesn't overlap */
 
 
-/* Modal Overlay with Blur */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 998;
-    display: none;
-}
 
-/* Attendance Modal */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 24px;
-    z-index: 999;
-    display: none;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
 
 /* Time Display */
 .time-display {
@@ -5222,33 +4792,9 @@ body {
     }
 }
 
-/* Modal Overlay with Blur */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.75);
-    backdrop-filter: blur(12px);
-    z-index: 999;
-}
 
-/* Enhanced Modal Layout */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%;
-    max-width: 1600px;
-    height: 90vh;
-    display: grid;
-    grid-template-columns: 400px 1fr;
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.25),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-}
+
+
 
 /* Left Panel Styling */
 .attendance-left {
@@ -5428,11 +4974,7 @@ body {
 }
 
 @media (max-width: 992px) {
-    .attendance-modal {
-        grid-template-columns: 1fr;
-        height: 95vh;
-        overflow-y: auto;
-    }
+   
 
     .attendance-left {
         border-right: none;
@@ -5441,12 +4983,7 @@ body {
 }
 
 @media (max-width: 640px) {
-    .attendance-modal {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-    }
-
+   
     .stats-grid {
         grid-template-columns: 1fr;
     }
@@ -5849,20 +5386,7 @@ body {
     }
 }
 
-/* Add these styles for the attendance modal */
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    width: 90%;
-    max-width: 380px;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-}
+
 
 .attendance-content {
     padding: 32px;
@@ -6018,19 +5542,7 @@ body {
     background: #e2e8f0;
 }
 
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border-radius: 20px;
-    padding: 24px;
-    width: 90%;
-    max-width: 360px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
+
 
 /* Time Display */
 .time-container {
@@ -6152,22 +5664,7 @@ body {
     cursor: pointer;
 }
 
-/* Advanced Attendance Modal Styles */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 24px;
-    padding: 32px;
-    box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.25),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    z-index: 1000;
-}
+
 
 /* Glassmorphism Effect */
 .glassmorphism {
@@ -6278,22 +5775,9 @@ body {
 }
 
 /* Analytics Panel */
-.analytics-panel {
-    margin-top: 24px;
-    padding: 16px;
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 16px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
 
-.stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-}
+
+
 
 .stat-icon {
     font-size: 24px;
@@ -6306,11 +5790,7 @@ body {
 
 /* Responsive Design */
 @media (max-width: 480px) {
-    .attendance-modal {
-        width: 90%;
-        padding: 24px;
-    }
-
+   
     .digital-clock {
         font-size: 36px;
     }
