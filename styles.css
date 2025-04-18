@@ -3742,10 +3742,7 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .attendance-modal {
-        width: 95%;
-        height: 95vh;
-    }
+   
 
     .table-header, .table-row {
         grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
@@ -3758,28 +3755,7 @@ body {
     }
 }
 
-/* Modern Attendance Modal Styling */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
-    background: white;
-    border-radius: 12px;
-    z-index: 1000;
-    display: none; /* Initially hidden */
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
 
-.attendance-modal.active {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
 
 .modal-overlay {
     display: none;
@@ -3963,27 +3939,7 @@ body {
     opacity: 1;
 }
 
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
-    background: white;
-    border-radius: 12px;
-    z-index: 1000;
-    display: none; /* Initially hidden */
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
 
-.attendance-modal.active {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
 
 .modal-overlay { 
     display: none;
@@ -4108,9 +4064,7 @@ body {
 
 /* Show classes */
 .modal-overlay.show,
-.attendance-modal.show {
-    display: block;
-}
+
 
 /* Remove all duplicate modal styles and keep just one clean version */
 .modal-overlay {
@@ -4125,19 +4079,7 @@ body {
     z-index: 998;
 }
 
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 400px;
-    background: white;
-    border-radius: 12px;
-    z-index: 999;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
+
 
 .modal-header {
     padding: 20px;
@@ -4159,88 +4101,23 @@ body {
     padding: 20px;
 }
 
-/* Show classes */
-.modal-overlay.show,
-.attendance-modal.show {
-    display: block;
-}
 
-/* Remove all duplicate modal styles and keep just one clean version */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 998;
-}
 
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 400px;
-    background: white;
-    border-radius: 12px;
-    z-index: 999;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
 
-.attendance-modal.show {
-    display: block;
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
+
+
 
 .modal-overlay.show {
     display: block;
 }
 
-/* Attendance Modal Styles */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 998;
-    transition: all 0.3s ease;
-}
 
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 560px;
-    background: white;
-    border-radius: 20px;
-    z-index: 999;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
+
 
 .modal-overlay.show,
-.attendance-modal.show {
-    opacity: 1;
-    display: block;
-}
 
-.attendance-modal.show {
-    transform: translate(-50%, -50%) scale(1);
-}
+
+
 
 /* Modal Header */
 .modal-header {
@@ -4492,9 +4369,7 @@ body {
 
 /* Responsive Design */
 @media (max-width: 640px) {
-    .attendance-modal {
-        width: 95%;
-    }
+   
 
     .digital-time {
         font-size: 2.5rem;
@@ -4509,28 +4384,7 @@ body {
     }
 }
 
-/* Modern Attendance Modal */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
-    background: #ffffff;
-    border-radius: 24px;
-    z-index: 1000;
-    display: none;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
 
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
 
 /* Modal Layout */
 .attendance-dashboard {
@@ -4674,29 +4528,10 @@ body {
     }
 }
 
-.attendance-modal {
-    /* ... existing styles ... */
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
 
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
 
-/* Add backdrop for modal */
-.attendance-modal::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-}
+
+
 
 /* Modal Overlay with Blur */
 .modal-overlay {
@@ -4712,23 +4547,7 @@ body {
     display: none;
 }
 
-/* Improved Attendance Modal */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1000px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 24px;
-    z-index: 1000;
-    display: none;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
+
 
 .attendance-dashboard {
     display: grid;
@@ -4886,11 +4705,7 @@ body {
     background: rgba(248, 250, 252, 0.8);
 }
 
-/* Show/Hide Modal */
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
+
 
 .productivity-chart {
     background: white;
@@ -4995,28 +4810,6 @@ body {
     display: none;
 }
 
-/* Attendance Modal */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 90%;
-    max-width: 1200px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 24px;
-    z-index: 999;
-    display: none;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.attendance-modal.show {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
 
 /* Time Display */
 .time-display {
@@ -5231,24 +5024,7 @@ body {
     z-index: 999;
 }
 
-/* Enhanced Modal Layout */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%;
-    max-width: 1600px;
-    height: 90vh;
-    display: grid;
-    grid-template-columns: 400px 1fr;
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.25),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-}
+
 
 /* Left Panel Styling */
 .attendance-left {
@@ -5428,11 +5204,7 @@ body {
 }
 
 @media (max-width: 992px) {
-    .attendance-modal {
-        grid-template-columns: 1fr;
-        height: 95vh;
-        overflow-y: auto;
-    }
+   
 
     .attendance-left {
         border-right: none;
@@ -5441,11 +5213,7 @@ body {
 }
 
 @media (max-width: 640px) {
-    .attendance-modal {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-    }
+  
 
     .stats-grid {
         grid-template-columns: 1fr;
@@ -5849,21 +5617,6 @@ body {
     }
 }
 
-/* Add these styles for the attendance modal */
-.attendance-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    width: 90%;
-    max-width: 380px;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-}
-
 .attendance-content {
     padding: 32px;
     text-align: center;
@@ -6018,19 +5771,7 @@ body {
     background: #e2e8f0;
 }
 
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border-radius: 20px;
-    padding: 24px;
-    width: 90%;
-    max-width: 360px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
+
 
 /* Time Display */
 .time-container {
@@ -6152,22 +5893,7 @@ body {
     cursor: pointer;
 }
 
-/* Advanced Attendance Modal Styles */
-.attendance-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 24px;
-    padding: 32px;
-    box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.25),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    z-index: 1000;
-}
+
 
 /* Glassmorphism Effect */
 .glassmorphism {
@@ -6306,10 +6032,7 @@ body {
 
 /* Responsive Design */
 @media (max-width: 480px) {
-    .attendance-modal {
-        width: 90%;
-        padding: 24px;
-    }
+ 
 
     .digital-clock {
         font-size: 36px;
@@ -6827,43 +6550,13 @@ body {
     text-align: center;
 }
 
-.hours-display span:first-child {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #4fd1c5;
-}
 
 .hours-display .label {
     font-size: 0.9rem;
     color: #64748b;
 }
 
-/* Legend Styles */
-.legend {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
-}
 
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #64748b;
-    font-size: 0.9rem;
-}
-
-.legend-item i {
-    font-size: 0.8rem;
-}
-
-.legend-item i.pending { color: #eab308; }
-.legend-item i.approved { color: #10b981; }
-.legend-item i.declined { color: #ef4444; }
-.legend-item i.leave { color: #8b5cf6; }
-.legend-item i.overtime { color: #3b82f6; }
-
-/* Table Styles */
 .attendance-table-container {
     background: white;
     border-radius: 20px;
@@ -7022,11 +6715,7 @@ body {
     text-align: center;
 }
 
-.hours-display span:first-child {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #4fd1c5;
-}
+
 
 .hours-display .label {
     font-size: 0.9rem;
@@ -7146,9 +6835,7 @@ body {
 }
 
 /* Make the schedule column more compact */
-.schedule-info {
-    font-size: 0.85rem;
-}
+
 
 /* Adjust column widths */
 .attendance-table th:first-child, /* # column */
