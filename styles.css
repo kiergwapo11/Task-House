@@ -44,7 +44,6 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    display: flex;
     background: rgba(211, 211, 211, 0.548);
     color: var(--secondary-color);
     padding-top: 80px; /* Adjust based on header height */
@@ -60,7 +59,7 @@ body {
     .task-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;>
     margin-bottom: 24px;
 }
 
@@ -2777,7 +2776,6 @@ body {
 /* Update the attendance styles */
 .attendance-modern {
     display: none; 
-    margin: 30px;
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     animation: fadeIn 1s ease;
@@ -3370,7 +3368,7 @@ body {
 
 .attendance-table tbody {
     display: block;
-    max-height: 300px; /* Height of 5 rows */
+    max-height: 490px; /* Height of 5 rows */
     overflow: hidden;
 }
 
