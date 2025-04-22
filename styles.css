@@ -1480,7 +1480,163 @@ body {
     z-index: 10001;
 }
 
+/* Stats Cards */
+.attendance-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+}
 
+/* Filters and Search */
+.attendance-filters {
+    padding: 0 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Table Container */
+.attendance-content {
+    padding: 0 2rem;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Bottom Actions */
+.attendance-actions {
+    position: sticky;
+    bottom: 0;
+    padding: 1.5rem 2rem;
+    background: white;
+    border-top: 1px solid #edf2f7;
+    margin-top: 2rem;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  
+
+    .table-header, .table-row {
+        grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
+        font-size: 0.9rem;
+    }
+
+    .attendance-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+
+
+.attendance-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-icon.present { background: #e8f5e9; }
+.stat-icon.working { background: #e3f2fd; }
+.stat-icon.break { background: #fff3e0; }
+
+/* Table Styling */
+
+
+
+
+.table-header, .table-row {
+    display: grid;
+    grid-template-columns: 50px 120px 120px 120px 100px 100px 100px 50px;
+    padding: 15px 20px;
+    align-items: center;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.table-row:hover {
+    background: #f8f9fa;
+}
+
+/* Action Buttons */
+.attendance-actions {
+    margin-top: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #edf2f7;
+}
+
+.clock-btn, .break-btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+
+.break-btn {
+    background: #fbd38d;
+    color: #744210;
+}
+
+.clock-btn:hover { background: #38b2ac; }
+.break-btn:hover { background: #f6ad55; }
+
+/* Status Indicators */
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.status.present { 
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status.break {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.status.absent {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* Modal Header */
 .modal-header {
     padding: 20px;
     background: white;
@@ -1499,6 +1655,114 @@ body {
     color: #1a202c;
 }
 
+/* Scrollable Content */
+.attendance-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .attendance-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .attendance-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .table-header, .table-row {
+        grid-template-columns: 50px 100px 100px 100px 80px;
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+
+
+
+/* Enhanced Stats Cards */
+.attendance-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Enhanced Table Styles */
+
+.table-row {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.table-row:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+
+
+
+.clock-btn:hover {
+    background: #45b8ac;
+    transform: translateY(-2px);
+}
+
+.break-btn {
+    background: #f8fafc;
+    color: #64748b;
+}
+.break-btn:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+}
+
+/* Status Indicators */
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status.present {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status.break {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status.absent {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
 
 .modal-header {
     padding: 20px;
@@ -1516,6 +1780,10 @@ body {
     color: #64748b;
 }
 
+.modal-body {
+    padding: 20px;
+}
+
 
 
 
@@ -1535,7 +1803,9 @@ body {
     color: #64748b;
 }
 
-
+.modal-body {
+    padding: 20px;
+}
 
 
 
@@ -1663,13 +1933,71 @@ body {
         font-size: 2.5rem;
     }
 
+    .time-tracking {
+        grid-template-columns: 1fr;
+    }
 
-   
+    .attendance-actions {
+        grid-template-columns: 1fr;
+    }
 }
 
 
 
+/* Modal Layout */
+.attendance-dashboard {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    height: 100%;
+    overflow: hidden;
+}
 
+/* Left Panel */
+.attendance-sidebar {
+    background: #f8fafc;
+    padding: 24px;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+}
+
+.time-display {
+    text-align: center;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.digital-clock {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    font-family: 'SF Mono', monospace;
+    margin-bottom: 8px;
+}
+
+.date-info {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Status Card */
+.status-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
 
 .status-dot {
     width: 10px;
@@ -1707,18 +2035,70 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  
+    .attendance-dashboard {
+        grid-template-columns: 1fr;
+    }
     
-    
+    .attendance-sidebar {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
 }
 
 
 
 
 
+.attendance-dashboard {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 24px;
+    padding: 24px;
+    height: 80vh;
+    max-height: 700px;
+}
 
+/* Left Panel Improvements */
+.attendance-sidebar {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 24px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
 
+.time-display {
+    text-align: center;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
 
+.digital-clock {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'SF Mono', monospace;
+    margin-bottom: 8px;
+}
+
+/* Status Card Improvements */
+.status-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
 
 .status-dot {
     width: 12px;
@@ -1785,12 +2165,137 @@ body {
 }
 
 /* Timeline Improvements */
+.timeline {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: 24px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    transition: all 0.2s ease;
+}
+
+.timeline-item:hover {
+    background: rgba(248, 250, 252, 0.8);
+}
+
+
+
+.productivity-chart {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 24px;
+}
+
+.chart-container {
+    height: 200px;
+    margin-top: 16px;
+}
+
+.productivity-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+/* Weekly Overview Panel - Updated */
+.weekly-overview {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    width: 200px;
+    padding: 20px;
+    box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 90;
+}
+
+.weekly-overview-header {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-top: 60px; /* Space for the header */
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.day-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.day-entry:hover {
+    background: rgba(248, 250, 252, 0.8);
+}
+
+.day-name {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.day-hours {
+    font-weight: 500;
+    color: #1e293b;
+    font-size: 14px;
+}
+
+.current-day {
+    background: #f8fafc;
+}
+
+.current-day .day-name {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Add this to ensure the main content doesn't overlap */
 
 
 
 
+/* Time Display */
+.time-display {
+    text-align: center;
+    padding: 32px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
 
-
+.digital-clock {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'SF Mono', monospace;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+}
 
 .current-date {
     color: #64748b;
@@ -1855,14 +2360,60 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
- 
+    .attendance-dashboard {
+        flex-direction: column;
+        height: auto;
+    }
 
-   
+    .attendance-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
 
-  
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modal Overlay with Blur */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(12px);
+    z-index: 999;
 }
 
 
+/* Left Panel Styling */
+.attendance-left {
+    background: #f8fafc;
+    padding: 32px;
+    border-right: 1px solid #e2e8f0;
+}
+
+/* Time Display */
+.time-display {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.digital-clock {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #0ea5e9;
+    margin-bottom: 8px;
+}
+
+.date-info {
+    color: #64748b;
+    font-size: 1.1rem;
+}
 
 /* Status and Controls */
 .work-status {
@@ -1949,13 +2500,17 @@ body {
 }
 
 @media (max-width: 992px) {
-   
 
-  
+
+    .attendance-left {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
 }
 
 @media (max-width: 640px) {
-   
+ 
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
@@ -2240,7 +2795,36 @@ body {
 
 
 
+.attendance-content {
+    padding: 32px;
+    text-align: center;
+}
 
+/* Digital Clock */
+.time-display {
+    margin-bottom: 24px;
+}
+
+
+
+.date-info {
+    color: #64748b;
+    margin-top: 8px;
+}
+
+/* Progress Circle */
+.progress-circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 24px;
+}
+
+.progress-circle svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
 
 .progress-bg {
     fill: none;
@@ -2590,8 +3174,11 @@ body {
 
 /* Responsive Design */
 @media (max-width: 480px) {
-   
-   
+
+
+    .digital-clock {
+        font-size: 36px;
+    }
 
     .progress-ring-wrapper {
         width: 160px;
@@ -2965,43 +3552,13 @@ body {
     text-align: center;
 }
 
-.hours-display span:first-child {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #4fd1c5;
-}
 
 .hours-display .label {
     font-size: 0.9rem;
     color: #64748b;
 }
 
-/* Legend Styles */
-.legend {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
-}
 
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #64748b;
-    font-size: 0.9rem;
-}
-
-.legend-item i {
-    font-size: 0.8rem;
-}
-
-.legend-item i.pending { color: #eab308; }
-.legend-item i.approved { color: #10b981; }
-.legend-item i.declined { color: #ef4444; }
-.legend-item i.leave { color: #8b5cf6; }
-.legend-item i.overtime { color: #3b82f6; }
-
-/* Table Styles */
 .attendance-table-container {
     background: white;
     border-radius: 20px;
@@ -3157,11 +3714,7 @@ body {
     text-align: center;
 }
 
-.hours-display span:first-child {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #4fd1c5;
-}
+
 
 .hours-display .label {
     font-size: 0.9rem;
@@ -3263,6 +3816,10 @@ body {
     white-space: nowrap; /* Prevent text wrapping */
 }
 
+/* Make the schedule column more compact */
+.schedule-info {
+    font-size: 0.85rem;
+}
 
 /* Adjust column widths */
 .attendance-table th:first-child, /* # column */
